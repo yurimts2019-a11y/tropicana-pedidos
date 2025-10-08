@@ -22,7 +22,7 @@
     try{
       const msg = localStorage.getItem('pedidoWhatsApp');
       if(msg){
-        const phone='5565984063195';
+        const phone='5565993321761';
         localStorage.removeItem('pedidoWhatsApp');
         window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
       } else {
