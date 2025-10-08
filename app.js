@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
     // 1. CONFIGURAÇÕES GLOBAIS E LIMITES
     // ===================================
-    const phone = '5565984063195'; // <-- 🚨 SUBSTITUA AQUI PELO SEU NÚMERO DE TELEFONE COM DDD
+    const phone = '5565993321761'; // <-- 🚨 SUBSTITUA AQUI PELO SEU NÚMERO DE TELEFONE COM DDD
     const EXTRA_LIMIT = 1; // Limite de adicionais pagos
     const FRUIT_LIMIT = 5; // Limite de frutas grátis
 
