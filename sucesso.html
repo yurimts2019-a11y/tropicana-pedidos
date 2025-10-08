@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pedido Enviado</title>
+<style>
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;display:flex;align-items:center;justify-content:center;height:100vh;background:#fff;color:#111}
+  .card{max-width:460px;padding:28px;border-radius:12px;text-align:center}
+  .emoji{font-size:48px;margin-bottom:12px}
+  h1{margin:0;font-size:20px}
+  p{margin-top:8px;color:#666}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji">✅🥳🍓</div>
+    <h1>Seu pedido está quase pronto! Em instantes você será direcionado ao WhatsApp para concluir.</h1>
+  </div>
+<script>
+  setTimeout(()=>{
+    try{
+      const msg = localStorage.getItem('pedidoWhatsApp');
+      if(msg){
+        const phone='5565984063195';
+        localStorage.removeItem('pedidoWhatsApp');
+        window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      } else {
+        // fallback: volta para a home
+        window.location.href = './';
+      }
+    }catch(e){
+      window.location.href = './';
+    }
+  },3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pt-BR" class="page-transition">
+<head>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Confirmação de Pedido - Delícias Tropicana</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=14"> 
+  
+  <style>
+    /* 1. Transição de Entrada da Página */
+    .fade-page {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+    }
+    .fade-page.loaded {
+        opacity: 1;
+    }
+    
+    /* 2. Transição de Saída (Ao clicar para mudar de página) */
+    .page-transition.fade-out .fade-page {
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+    }
+    /* 3. Evita que o scroll apareça durante a transição */
+    .page-transition.fade-out {
+        overflow: hidden; 
+    }
+  </style>
+  
+</head>
+<body class="fade-page">
+  <main class="container">
+    <section class="menu">
+      <h2>✅ Quase lá! Confira seu Pedido:</h2>
+
+      <div class="resumo-box section-card" id="resumoFinalContainer">
+          
+          <h3 class="section-title">Seu Nome:</h3>
+          <div class="campo"><span class="label">Nome</span>
+              <input type="text" id="nameInputFinal" placeholder="Ex.: Claudiane" required>
+          </div>
+          <hr style="margin: 20px 0; border: 0; border-top: 1px dashed #eee;">
+          
+          <h3 class="section-title">Resumo do Pedido:</h3>
+          <div id="resumoPedido" class="resumo-content"></div>
+
+          <div class="confirmation-actions"> 
+              <div class="resumo-total-final resumo-total centralizado" id="totalAPagar"></div>
+
+              <button id="enviarPedido" class="btn btn-whatsapp">
+                  Enviar Pedido via WhatsApp
+              </button>
+              <button id="voltarMenu" class="btn btn-voltar">
+                  Voltar e Adicionar Mais Saladas
+              </button>
+          </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // A função handlePageTransition deve ser exposta globalmente em app.js
+    // Se não estiver, esta linha pode falhar, mas deve funcionar se o app.js estiver carregado primeiro
+    if(typeof handlePageTransition !== 'function') {
+        window.handlePageTransition = function(url) {
+            document.documentElement.classList.add('fade-out');
+            setTimeout(() => { window.location.href = url; }, 300);
+        };
+    }
+
+    // Variável global para o telefone
+    const phone = '5565984063195'; 
+
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(value);
+    };
+
+    function calcularTotalGeral() {
+        const pedidosJSON = localStorage.getItem('tropicanaPedidos');
+        const pedidos = pedidosJSON ? JSON.parse(pedidosJSON) : [];
+        let totalPedido = 0;
+        pedidos.forEach(item => {
+            totalPedido += item.total;
+        });
+        return totalPedido;
+    }
+
+// ======================================================
+// FUNÇÃO PARA GERAR O TEXTO DO WHATSAPP (COMPACTADA)
+// - Espaçamento excessivo removido
+// - Negrito mantido nos locais solicitados
+// ======================================================
+const getWhatsappText = (total) => {
+    // Recupera os pedidos do localStorage
+    const pedidos = JSON.parse(localStorage.getItem('tropicanaPedidos')) || [];
+    const name = localStorage.getItem('tropicanaName') || 'Cliente';
+
+    // 1. Início da Mensagem (NOVO FORMATO LIMPO COM NEGRITO NO TÍTULO E NOME)
+    let text = `*NOVO PEDIDO - DELÍCIAS TROPICANA*\n\n`; // Dupla quebra para separar o título da mensagem
+    text += `Meu nome é *${name.trim()}* e este é o meu pedido:\n\n`; // Dupla quebra para separar a introdução do primeiro item
+    
+    // 2. Loop pelos itens do pedido
+    pedidos.forEach((item, index) => {
+        const precoUnitario = item.tamanho.preco;
+
+        // Título do Item - AGORA COM APENAS UMA QUEBRA DE LINHA NO FINAL
+        text += `ITEM ${index + 1}\n`; 
+        
+        // Tamanho e Preço
+        text += `Tamanho: ${item.tamanho.nome} — ${formatCurrency(precoUnitario)}\n`;
+        
+        // Categoria 1: Frutas (Grátis)
+        if (item.fruits && item.fruits.length > 0) {
+            // Usa dupla quebra para separar o item.tamanho da categoria
+            text += `\n*Frutas (Grátis):*\n`; 
+            item.fruits.forEach(fruta => {
+                text += `• ${fruta.nome}\n`;
+            });
+        }
+
+        // Categoria 2: Adicionais de Frutas (Extras Pagos)
+        if (item.extras && item.extras.length > 0) {
+            text += `\n*Adicionais de Fruta (R$2,00 cada):*\n`; 
+            item.extras.forEach(extra => {
+                text += `• ${extra.nome}\n`;
+            });
+        }
+
+        // Categoria 3: Acompanhamentos (Grátis)
+        if (item.acomp && item.acomp.length > 0) {
+            text += `\n*Acompanhamentos (Grátis):*\n`; 
+            item.acomp.forEach(acomp => {
+                // NOTA: Os seus acompanhamentos estavam usando '*' em vez de '•'. Mantenho o '*' se for sua preferência.
+                text += `* ${acomp.nome}\n`; 
+            });
+        }
+        
+        // Observação (Se existir)
+        if (item.obs && item.obs.trim() !== '') {
+            const obsLimpa = item.obs.trim().replace(/\n/g, ' '); 
+            text += `\nObservação: ${obsLimpa}\n`;
+        }
+        
+        // Subtotal do Item - REMOVIDO ESPAÇO EXTRA ANTES, DEIXANDO APENAS UM NOVO PARÁGRAFO DE ESPAÇAMENTO
+        text += `\n*Subtotal: ${formatCurrency(item.total)}*\n`; 
+        
+        // Linha de separação entre itens
+        text += `---------------------------------\n`; 
+    });
+
+    // 3. Rodapé
+    // Dupla quebra de linha para separar o rodapé do último item.
+    text += `\n\nAguardando a confirmação do pedido e o cálculo da taxa de entrega.\n\n`; 
+    text += `*Obrigado!*`; 
+
+    // 4. Retorna a mensagem formatada
+    return text;
+};
+
+    function loadAndDisplayOrder() {
+        
+        // 1. RECUPERAÇÃO DE DADOS
+        const pedidosJSON = localStorage.getItem('tropicanaPedidos');
+        const pedidos = pedidosJSON ? JSON.parse(pedidosJSON) : [];
+
+        // 2. REFERÊNCIAS DO DOM
+        const resumoPedidoDiv = document.getElementById('resumoPedido');
+        const totalAPagarDiv = document.getElementById('totalAPagar');
+        const nameInput = document.getElementById('nameInputFinal');
+        
+        // 3. RECUPERAÇÃO DE DADOS (Remove Bairro)
+        nameInput.value = localStorage.getItem('tropicanaName') || '';
+        
+        // 4. CÁLCULO E EXIBIÇÃO
+        let resumoTexto = '';
+        let totalPedido = 0;
+
+        if (pedidos.length === 0) {
+            resumoPedidoDiv.textContent = 'Nenhum pedido encontrado. Voltando ao menu...';
+            totalAPagarDiv.textContent = 'TOTAL: R$0,00';
+            handlePageTransition('index.html');
+            return;
+        }
+
+        resumoTexto += pedidos.map((item, index) => {
+            const totalItem = item.total; 
+            let linha = `*1x* Salada #${index + 1} (${item.tamanho.nome}): `;
+            let detalhes = [];
+
+            if (item.fruits.length) detalhes.push(`Frutas: ${item.fruits.map(f => f.nome).join(', ')}`);
+            if (item.extras.length) detalhes.push(`Adic: ${item.extras.map(e => e.nome).join(', ')}`);
+            if (item.acomp.length) detalhes.push(`Acomp: ${item.acomp.map(a => a.nome).join(', ')}`);
+            if (item.obs) detalhes.push(`Obs: ${item.obs}`);
+            
+            linha += detalhes.join(' | ') + ` - ${formatCurrency(totalItem)}`;
+            totalPedido += totalItem;
+            return linha;
+        }).join('\n\n'); 
+
+        resumoPedidoDiv.textContent = resumoTexto;
+        totalAPagarDiv.textContent = 'TOTAL: ' + formatCurrency(totalPedido);
+
+        // 5. LISTENERS
+        document.getElementById('enviarPedido').addEventListener('click', () => {
+             // 5.1 Validar campos
+            if (nameInput.value.trim() === '') {
+                alert('Por favor, preencha seu nome.');
+                return;
+            }
+             // 5.2 Salvar Nome
+            localStorage.setItem('tropicanaName', nameInput.value.trim());
+
+            const totalPedido = calcularTotalGeral();
+            // 5.3 Gera o texto para o WhatsApp com a nova formatação
+            let whatsappText = getWhatsappText(totalPedido);
+
+            // ✅ REMOÇÃO DE EMOJIS (Para evitar caracteres estranhos na URL)
+            whatsappText = whatsappText.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDC00-\uDFFF]|\u200D|\uFE0F/g, '');
+
+
+            // 5.4 Salva a mensagem no storage e redireciona para a tela de sucesso
+            localStorage.setItem('pedidoWhatsApp', whatsappText);
+
+            // 5.5 Limpa o localStorage de pedido (VOLTA À ESTACA ZERO)
+            localStorage.removeItem('tropicanaPedidos');
+            localStorage.removeItem('tropicanaName');
+            
+            // 5.6 Redireciona para a tela de sucesso
+            handlePageTransition('sucesso.html'); 
+        });
+
+        // Listener para o botão de Voltar
+        document.getElementById('voltarMenu').addEventListener('click', () => {
+             // Salva o nome antes de voltar
+             localStorage.setItem('tropicanaName', nameInput.value.trim());
+             handlePageTransition('index.html');
+        });
+        
+        // Listener para persistir nome no localStorage
+        nameInput.addEventListener('input', () => localStorage.setItem('tropicanaName', nameInput.value.trim()));
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+        loadAndDisplayOrder();
+    });
+  </script>
+</body>
+</html>

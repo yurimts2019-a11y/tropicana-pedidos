@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR" class="page-transition">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Delícias Tropicana - Menu</title>
+  
+  <link rel="manifest" href="/manifest.json">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=14"> 
+  
+  <style>
+    /* 1. Transição de Entrada da Página */
+    .fade-page {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+    }
+    .fade-page.loaded {
+        opacity: 1;
+    }
+    
+    /* 2. Transição de Saída (Ao clicar para mudar de página) */
+    .page-transition.fade-out .fade-page {
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+    }
+    /* 3. Evita que o scroll apareça durante a transição */
+    .page-transition.fade-out {
+        overflow: hidden; 
+    }
+  </style>
+  
+</head>
+<body class="fade-page">
+  
+ <header class="main-header">
+    <div class="banner-image">
+      <img src="image_2d4108.jpg" alt="Banner de Frutas Delícias Tropicana" loading="lazy">
+    </div>
+    <div class="logo-circle">
+      <img src="icon-192.png" alt="Logo Delícias Tropicana" loading="lazy">
+    </div>
+    <div class="store-info">
+      <p class="store-status">Fechado</p> 
+      <div class="delivery-details">
+        <span>🕒 60-75min</span>
+        <span>🛵 Consulte a taxa de entrega!</span>
+      <a href="https://www.instagram.com/deliciastropicana" class="more-details" target="_blank">
+  <strong>@deliciastropicana</strong>
+</a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+      
+      <div class="menu">
+          
+          <div class="modern-title-container">
+              <h2 class="modern-title-text">Monte Sua Salada de Frutas!</h2>
+              <p class="modern-subtitle">Escolha seu tamanho e personalize!</p>
+          </div>
+          <div id="sizeSelectionContainer" class="size-selection-container" style="margin-bottom: 25px;">
+          </div>
+          
+          <div class="section-card" id="seuPedidoCard"> 
+              <h3 class="section-title">Seu Pedido</h3>
+              
+              <div class="cards-container" id="cardsContainer">
+                  <p class="empty-state">Seu carrinho está vazio. Comece a montar sua salada!</p>
+              </div>
+              
+              <div class="resumo-box" id="resumoBox">
+                  <p><strong>Resumo Detalhado:</strong></p>
+                  <div id="resumoContent" class="resumo-content">Nenhuma Salada adicionada.</div>
+              </div>
+
+          </div>
+      </div>
+      
+    <div id="customizationModal" class="modal-overlay">
+      <div class="modal-content">
+          <button class="close-modal" id="closeModal">X</button>
+          
+          <h3 id="modalTitle">Personalizar Salada</h3>
+          
+          <div class="custom-options">
+              <div class="grupo-opcoes">
+                  <h4 class="categoria-title">➡️ Escolha as Frutas (Máx. 05):</h4> 
+                  <div class="opcoes opcoes-frutas" id="frutasOpcoes"></div>
+              </div>
+
+              <div class="grupo-opcoes">
+                  <h4 class="categoria-title">➡️ Adicionais de Frutas (Máx. 01 - R$2,00 cada):</h4>
+                  <div class="opcoes opcoes-extras" id="extrasOpcoes"></div>
+              </div>
+
+              <div class="grupo-opcoes">
+                  <h4 class="categoria-title">➡️ Acompanhamentos (Grátis):</h4>
+                  <div class="opcoes opcoes-acomp" id="acompOpcoes"></div>
+              </div>
+          </div>
+
+          <button id="addToOrder" class="btn adicionar">Adicionar ao Pedido - <span id="modalTotal">R$0,00</span></button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="app.js?v=14"></script>
+</body>
+</html>
