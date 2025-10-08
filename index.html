@@ -114,7 +114,15 @@
     </div>
   </div>
 
+  <script>
+  // Adiciona versão automática (timestamp) ao CSS e JS
+  document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(el => {
+    const attr = el.tagName === 'LINK' ? 'href' : 'src';
+    const url = new URL(el.getAttribute(attr), window.location.origin);
+    url.searchParams.set('v', Date.now()); // gera número único
+    el.setAttribute(attr, url.toString());
+  });
+</script>
 
-  <script src="app.js?v=14"></script>
 </body>
 </html>
