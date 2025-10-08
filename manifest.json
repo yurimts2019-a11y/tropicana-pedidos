@@ -1,21 +1,20 @@
 {
-    "name": "Delícias Tropicana",
-    "short_name": "Tropicana",
-    "description": "Cardápio e Pedidos de Salada de Frutas da Delícias Tropicana",
-    "start_url": "/index.html",
-    "display": "standalone",
-    "background_color": "#FFFDE7",
-    "theme_color": "#ff9800",
-    "icons": [
-        {
-            "src": "icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "name": "Delícias Tropicana",
+  "short_name": "Tropicana",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFD700",
+  "theme_color": "#FFD700",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
