@@ -889,7 +889,7 @@ textarea.obs {
   background: #fff3e0;
   color: #333;
   text-align: center;
-  padding: 25px 10px 70px; /* espaço extra por causa do fixo */
+  padding: 25px 10px;
   font-size: 0.95rem;
   border-top: 2px solid #FFD700;
 }
