@@ -5,12 +5,12 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Delícias Tropicana - Cardápio</title>
+  <title>Delícias Tropicana - Menu</title>
   
   <link rel="manifest" href="/manifest.json">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=15"> 
+  <link rel="stylesheet" href="style.css?v=14"> 
   
   <style>
     /* 1. Transição de Entrada da Página */
@@ -44,61 +44,44 @@
       <img src="icon-192.png" alt="Logo Delícias Tropicana" loading="lazy">
     </div>
     <div class="store-info">
-      <h1 class="store-name">Delícias Tropicana - Pedidos</h1>
       <p class="store-status">Fechado</p> 
-    </div>
-</header>
-
-  <main class="container">
-    <div class="page-content">
-      
-      <div class="left-column">
-          
-          <section class="client-data-form card">
-              <h3 class="section-title">👤 Seus Dados</h3>
-              <div class="form-group">
-                  <label for="nameInput">Seu Nome:</label>
-                  <input type="text" id="nameInput" placeholder="Ex: Maria da Silva" required>
-              </div>
-              <div class="form-group">
-                  <label for="whatsappInput">WhatsApp (DDD + Número):</label>
-                  <input type="tel" id="whatsappInput" placeholder="(65) 99999-9999" required minlength="11">
-              </div>
-              <div class="form-group">
-                  <label for="neighborhoodInput">Bairro / Local de Entrega:</label>
-                  <input type="text" id="neighborhoodInput" placeholder="Ex: Centro, Rua das Flores..." required>
-              </div>
-          </section>
-
-          <section class="loyalty-card card" id="loyaltyCardContainer" style="display:none;">
-              <h3 class="section-title">🏆 Cartão Fidelidade</h3>
-              <p id="fidelityMessage">Faltam X selos para o seu prêmio!</p>
-              <div class="seals-grid" id="sealsGrid">
-                  </div>
-          </section>
-
-          <h2 class="menu-title">Escolha o Tamanho da Sua Salada:</h2>
-          
-          <div class="size-selection-container" id="sizeSelectionContainer">
-              </div>
-
-      </div>
-
-      <div class="right-column">
-          <h3 class="section-title">🛒 Seu Carrinho</h3>
-          <div class="card-list" id="cardsContainer">
-              <p class="empty-state">Seu carrinho está vazio. Comece a montar sua salada!</p>
-          </div>
-          
-          <div class="resumo-box" id="resumoBox">
-              <p><strong>Resumo Detalhado:</strong></p>
-              <div id="resumoContent" class="resumo-content">Nenhuma Salada adicionada.</div>
-          </div>
+      <div class="delivery-details">
+        <span>🕒 60-75min</span>
+        <span>🛵 Consulte a taxa de entrega!</span>
+      <a href="https://www.instagram.com/deliciastropicana" class="more-details" target="_blank">
+  <strong>@deliciastropicana</strong>
+</a>
       </div>
     </div>
-  </main>
+  </header>
+  
+  <div class="container">
       
-  <div id="customizationModal" class="modal-overlay">
+      <div class="menu">
+          
+          <div class="modern-title-container">
+              <h2 class="modern-title-text">Monte Sua Salada de Frutas!</h2>
+              <p class="modern-subtitle">Escolha seu tamanho e personalize!</p>
+          </div>
+          <div id="sizeSelectionContainer" class="size-selection-container" style="margin-bottom: 25px;">
+          </div>
+          
+          <div class="section-card" id="seuPedidoCard"> 
+              <h3 class="section-title">Seu Pedido</h3>
+              
+              <div class="cards-container" id="cardsContainer">
+                  <p class="empty-state">Seu carrinho está vazio. Comece a montar sua salada!</p>
+              </div>
+              
+              <div class="resumo-box" id="resumoBox">
+                  <p><strong>Resumo Detalhado:</strong></p>
+                  <div id="resumoContent" class="resumo-content">Nenhuma Salada adicionada.</div>
+              </div>
+
+          </div>
+      </div>
+      
+    <div id="customizationModal" class="modal-overlay">
       <div class="modal-content">
           <button class="close-modal" id="closeModal">X</button>
           
@@ -111,7 +94,7 @@
               </div>
 
               <div class="grupo-opcoes">
-                  <h4 class="categoria-title">➕ Adicionais de Frutas (Máx. 02 - R$3,00 cada):</h4>
+                  <h4 class="categoria-title">➡️ Adicionais de Frutas (Máx. 01 - R$2,00 cada):</h4>
                   <div class="opcoes opcoes-extras" id="extrasOpcoes"></div>
               </div>
 
@@ -119,32 +102,14 @@
                   <h4 class="categoria-title">➡️ Acompanhamentos (Grátis):</h4>
                   <div class="opcoes opcoes-acomp" id="acompOpcoes"></div>
               </div>
-              
-              <label class="campo"><span class="label">Observações</span>
-                  <textarea class="obs" id="obsInput" rows="2" placeholder="Ex.: Salada sem mel, mais granola..."></textarea>
-              </label>
-
-              <div class="campo" style="margin-top: 20px;">
-                  <span class="label">Quantidade deste Item</span>
-                  <input type="number" id="quantityInput" value="1" min="1" max="10" style="width: 100px; text-align: center; padding: 8px;">
-              </div>
-              
-              <div class="preview-box">
-                  <p><strong>Resumo da Sua Escolha:</strong></p>
-                  <div id="modalResumo" class="resumo-content">Selecione um tamanho para começar.</div>
-              </div>
-
           </div>
 
           <button id="addToOrder" class="btn adicionar">Adicionar ao Pedido - <span id="modalTotal">R$0,00</span></button>
       </div>
     </div>
-  
-  <footer class="footer-bar">
-    <span id="footerTotal" class="footer-total-price">TOTAL: R$0,00</span>
-    <button id="footerConfirmar" class="btn confirmar" disabled>CONFIRMAR PEDIDO</button>
-  </footer>
+  </div>
 
-  <script src="app.js?v=15"></script> 
+
+  <script src="app.js?v=14"></script>
 </body>
 </html>

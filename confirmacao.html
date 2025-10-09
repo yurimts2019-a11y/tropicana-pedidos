@@ -7,7 +7,7 @@
   <title>Confirmação de Pedido - Delícias Tropicana</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=15"> 
+  <link rel="stylesheet" href="style.css?v=14"> 
   
   <style>
     /* 1. Transição de Entrada da Página */
@@ -28,87 +28,6 @@
     .page-transition.fade-out {
         overflow: hidden; 
     }
-    
-    /* Estilos do Resumo da Confirmação */
-    .resumo-box ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .item-pedido {
-        border-bottom: 1px dashed #eee;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-    }
-    .item-pedido:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-    }
-    .item-header {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 600;
-        color: var(--brown);
-        margin-bottom: 3px;
-    }
-    .item-details {
-        font-size: 0.8em;
-        color: var(--muted);
-        margin: 0;
-    }
-
-    /* Estilos do Footer de Confirmação */
-    .confirmation-actions {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border-top: 1px solid #eee;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        padding: 15px 16px;
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;
-        align-items: center; 
-        gap: 10px; 
-    }
-
-    .confirmation-actions .resumo-total {
-        font-size: 1.5em;
-        font-weight: 700;
-        color: var(--orange); 
-        text-align: center; 
-        width: 100%; 
-        padding-bottom: 5px;
-    }
-    
-    .btn-whatsapp {
-        background-color: #25D366; 
-        color: white;
-        font-weight: 700;
-        width: 100%; 
-        padding: 15px 20px;
-        border: none;
-        border-radius: 8px;
-        transition: background-color 0.2s;
-    }
-
-    .btn-whatsapp:hover {
-        background-color: #128C7E;
-    }
-
-    .btn-voltar {
-        background: none;
-        color: var(--blue);
-        border: none;
-        font-size: 0.9em;
-        cursor: pointer;
-    }
-    
-    .container {
-        padding-bottom: 220px; /* Aumentado para acomodar o novo footer de ações */
-    }
   </style>
   
 </head>
@@ -116,43 +35,46 @@
   <main class="container">
     <section class="menu">
       <h2>✅ Quase lá! Confira seu Pedido:</h2>
-      <p style="color:var(--brown); font-size:1.1em; margin-bottom: 20px;">
-          Por favor, confira os dados de entrega e o resumo dos seus itens.
-      </p>
 
-      <h3>Seus Dados de Entrega</h3>
-      <section class="client-data-section">
-          <label class="campo"><span class="label">Seu Nome Completo *</span>
-              <input type="text" id="nameInput" placeholder="Ex: Maria da Silva" required>
-          </label>
-          <label class="campo"><span class="label">Seu WhatsApp (com DDD) *</span>
-              <input type="tel" id="whatsappInput" placeholder="(99) 99999-9999" required>
-          </label>
-          <label class="campo"><span class="label">Endereço/Bairro de Entrega *</span>
-              <input type="text" id="neighborhoodInput" placeholder="Ex: Rua X, 123 - Bairro Y" required>
-          </label>
-      </section>
+      <div class="resumo-box section-card" id="resumoFinalContainer">
+          
+          <h3 class="section-title">Seu Nome:</h3>
+          <div class="campo"><span class="label">Nome</span>
+              <input type="text" id="nameInputFinal" placeholder="Ex.: Claudiane" required>
+          </div>
+          <hr style="margin: 20px 0; border: 0; border-top: 1px dashed #eee;">
+          
+          <h3 class="section-title">Resumo do Pedido:</h3>
+          <div id="resumoPedido" class="resumo-content"></div>
 
-      <h3>Resumo do Pedido</h3>
-      <div class="resumo-box" id="resumoBox">
-          <p><strong>Itens Selecionados:</strong></p>
-          <ul id="resumoContent">
-              <li style="text-align:center;">Carregando resumo...</li>
-          </ul> 
+          <div class="confirmation-actions"> 
+              <div class="resumo-total-final resumo-total centralizado" id="totalAPagar"></div>
+
+              <button id="enviarPedido" class="btn btn-whatsapp">
+                  Enviar Pedido via WhatsApp
+              </button>
+              <button id="voltarMenu" class="btn btn-voltar">
+                  Voltar e Adicionar Mais Saladas
+              </button>
+          </div>
+
       </div>
-      
     </section>
   </main>
-  
-  <div class="confirmation-actions">
-      <div class="resumo-total">TOTAL A PAGAR: <span id="totalValue">R$0,00</span></div>
-      <button class="btn-whatsapp" id="btnConfirmarWhatsApp">CONFIRMAR E ENVIAR PEDIDO VIA WHATSAPP</button>
-      <button class="btn-voltar" id="voltarMenu">← ADICIONAR/EDITAR MAIS ITENS</button>
-  </div>
 
+  <script>
+    // A função handlePageTransition deve ser exposta globalmente em app.js
+    // Se não estiver, esta linha pode falhar, mas deve funcionar se o app.js estiver carregado primeiro
+    if(typeof handlePageTransition !== 'function') {
+        window.handlePageTransition = function(url) {
+            document.documentElement.classList.add('fade-out');
+            setTimeout(() => { window.location.href = url; }, 300);
+        };
+    }
 
-<script>
-    // Utility para formatar preço (i18n)
+    // Variável global para o telefone
+    const phone = '5565984063195'; 
+
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('pt-BR', {
             style: 'currency',
@@ -160,186 +82,175 @@
         }).format(value);
     };
 
-    // Função para gerenciar a transição (fade-out)
-    function handlePageTransition(url) {
-        document.documentElement.classList.add('fade-out');
-        setTimeout(() => {
-            window.location.href = url;
-        }, 300); 
-    }
-    
-    // =========================================================
-    // FUNÇÃO PARA GERAÇÃO DE TEXTO DO WHATSAPP (com pluralização)
-    // =========================================================
-    function getWhatsappText(totalPedido) {
-        
-        const pedidos = JSON.parse(localStorage.getItem('tropicanaPedidos') || '[]');
-        const name = localStorage.getItem('tropicanaName') || 'Cliente';
-        const neighborhood = localStorage.getItem('tropicanaNeighborhood') || 'Não Informado';
-        const whatsapp = localStorage.getItem('tropicanaWhatsapp') || 'Não Informado';
-
-        // NOVO: Contar o número de itens únicos no pedido.
-        const numSaladas = pedidos.length;
-        
-        // Determina a palavra correta: "SALADA" ou "SALADAS"
-        const pluralizacao = numSaladas === 1 ? 'SALADA' : 'SALADAS'; 
-        
-        // 1. Inicia o texto do WhatsApp
-        let whatsappText = `*PEDIDO TROPICANA*\n\n`;
-        whatsappText += `*DADOS DO CLIENTE:*\n`;
-        whatsappText += `Nome: ${name}\n`;
-        whatsappText += `WhatsApp: ${whatsapp}\n`;
-        whatsappText += `Endereço: ${neighborhood}\n\n`;
-        whatsappText += `*ITENS DO PEDIDO:*\n`;
-
-        // 2. Itera sobre os pedidos (Corpo da Mensagem)
-        pedidos.forEach((item, index) => {
-            
-            // Item principal
-            whatsappText += `*${item.quantity}x* Salada #${index + 1} (${item.tamanho.nome}):\n`;
-            
-            // Detalhes
-            if (item.fruits.length) {
-                whatsappText += `- Frutas: ${item.fruits.map(f => f.nome).join(', ')}\n`;
-            }
-            
-            if (item.extras.length) {
-                const nomes = item.extras.map(e => e.nome);
-                // NOTA: Usando o preço do primeiro extra, assumindo que são todos iguais
-                const precoExtras = item.extras.length * item.extras[0].preco; 
-                whatsappText += `- Adicionais: ${nomes.join(', ')} (+${formatCurrency(precoExtras)})\n`;
-            }
-            
-            if (item.acomp.length) {
-                whatsappText += `- Acompanhamentos: ${item.acomp.map(a => a.nome).join(', ')}\n`;
-            }
-
-            if (item.obs) {
-                whatsappText += `- Obs: ${item.obs}\n`;
-            }
-            
-            whatsappText += `\n`; // Adiciona uma linha em branco entre os itens
-            
-            // **REMOVIDO: Linha com o total unitário do item**
+    function calcularTotalGeral() {
+        const pedidosJSON = localStorage.getItem('tropicanaPedidos');
+        const pedidos = pedidosJSON ? JSON.parse(pedidosJSON) : [];
+        let totalPedido = 0;
+        pedidos.forEach(item => {
+            totalPedido += item.total;
         });
-
-        // 3. Linha do Total Geral no final (AGORA COM PLURALIZAÇÃO)
-        whatsappText += `*VALOR TOTAL DA${pluralizacao}:* ${formatCurrency(totalPedido)}`;
-
-        return whatsappText;
+        return totalPedido;
     }
-    // =========================================================
+
+// ======================================================
+// FUNÇÃO PARA GERAR O TEXTO DO WHATSAPP (COMPACTADA)
+// - Espaçamento excessivo removido
+// - Negrito mantido nos locais solicitados
+// ======================================================
+const getWhatsappText = (total) => {
+    // Recupera os pedidos do localStorage
+    const pedidos = JSON.parse(localStorage.getItem('tropicanaPedidos')) || [];
+    const name = localStorage.getItem('tropicanaName') || 'Cliente';
+
+    // 1. Início da Mensagem (NOVO FORMATO LIMPO COM NEGRITO NO TÍTULO E NOME)
+    let text = `*NOVO PEDIDO - DELÍCIAS TROPICANA*\n\n`; // Dupla quebra para separar o título da mensagem
+    text += `Meu nome é *${name.trim()}* e este é o meu pedido:\n\n`; // Dupla quebra para separar a introdução do primeiro item
     
-    // Início do Script de Inicialização da Confirmação
-    function initConfirmation() {
+    // 2. Loop pelos itens do pedido
+    pedidos.forEach((item, index) => {
+        const precoUnitario = item.tamanho.preco;
+
+        // Título do Item - AGORA COM APENAS UMA QUEBRA DE LINHA NO FINAL
+        text += `ITEM ${index + 1}\n`; 
         
-        // 1. Referências aos elementos HTML (Usando IDs CORRETOS)
-        const nameInput = document.getElementById('nameInput');
-        const phoneInput = document.getElementById('whatsappInput'); 
-        const neighborhoodInput = document.getElementById('neighborhoodInput');
-        const resumoContent = document.getElementById('resumoContent');
-        const totalSpan = document.getElementById('totalValue');
-        const btnConfirmar = document.getElementById('btnConfirmarWhatsApp');
+        // Tamanho e Preço
+        text += `Tamanho: ${item.tamanho.nome} — ${formatCurrency(precoUnitario)}\n`;
         
-        const pedidos = JSON.parse(localStorage.getItem('tropicanaPedidos') || '[]');
+        // Categoria 1: Frutas (Grátis)
+        if (item.fruits && item.fruits.length > 0) {
+            // Usa dupla quebra para separar o item.tamanho da categoria
+            text += `\n*Frutas (Grátis):*\n`; 
+            item.fruits.forEach(fruta => {
+                text += `• ${fruta.nome}\n`;
+            });
+        }
+
+        // Categoria 2: Adicionais de Frutas (Extras Pagos)
+        if (item.extras && item.extras.length > 0) {
+            text += `\n*Adicionais de Fruta (R$2,00 cada):*\n`; 
+            item.extras.forEach(extra => {
+                text += `• ${extra.nome}\n`;
+            });
+        }
+
+        // Categoria 3: Acompanhamentos (Grátis)
+        if (item.acomp && item.acomp.length > 0) {
+            text += `\n*Acompanhamentos (Grátis):*\n`; 
+            item.acomp.forEach(acomp => {
+                // NOTA: Os seus acompanhamentos estavam usando '*' em vez de '•'. Mantenho o '*' se for sua preferência.
+                text += `* ${acomp.nome}\n`; 
+            });
+        }
         
+        // Observação (Se existir)
+        if (item.obs && item.obs.trim() !== '') {
+            const obsLimpa = item.obs.trim().replace(/\n/g, ' '); 
+            text += `\nObservação: ${obsLimpa}\n`;
+        }
+        
+        // Subtotal do Item - REMOVIDO ESPAÇO EXTRA ANTES, DEIXANDO APENAS UM NOVO PARÁGRAFO DE ESPAÇAMENTO
+        text += `\n*Subtotal: ${formatCurrency(item.total)}*\n`; 
+        
+        // Linha de separação entre itens
+        text += `---------------------------------\n`; 
+    });
+
+    // 3. Rodapé
+    // Dupla quebra de linha para separar o rodapé do último item.
+    text += `\n\nAguardando a confirmação do pedido e o cálculo da taxa de entrega.\n\n`; 
+    text += `*Obrigado!*`; 
+
+    // 4. Retorna a mensagem formatada
+    return text;
+};
+
+    function loadAndDisplayOrder() {
+        
+        // 1. RECUPERAÇÃO DE DADOS
+        const pedidosJSON = localStorage.getItem('tropicanaPedidos');
+        const pedidos = pedidosJSON ? JSON.parse(pedidosJSON) : [];
+
+        // 2. REFERÊNCIAS DO DOM
+        const resumoPedidoDiv = document.getElementById('resumoPedido');
+        const totalAPagarDiv = document.getElementById('totalAPagar');
+        const nameInput = document.getElementById('nameInputFinal');
+        
+        // 3. RECUPERAÇÃO DE DADOS (Remove Bairro)
+        nameInput.value = localStorage.getItem('tropicanaName') || '';
+        
+        // 4. CÁLCULO E EXIBIÇÃO
+        let resumoTexto = '';
+        let totalPedido = 0;
+
         if (pedidos.length === 0) {
-            // Se o carrinho estiver vazio, redireciona para o menu
+            resumoPedidoDiv.textContent = 'Nenhum pedido encontrado. Voltando ao menu...';
+            totalAPagarDiv.textContent = 'TOTAL: R$0,00';
             handlePageTransition('index.html');
             return;
         }
 
-        // 2. Carregar Dados Pessoais e calcular Total
-        nameInput.value = localStorage.getItem('tropicanaName') || '';
-        phoneInput.value = localStorage.getItem('tropicanaWhatsapp') || '';
-        neighborhoodInput.value = localStorage.getItem('tropicanaNeighborhood') || '';
-
-        let totalPedido = 0;
-        let resumoHTML = '<ul>';
-        
-        pedidos.forEach((item, index) => {
-            const totalMultiplicado = item.total * item.quantity;
-            totalPedido += totalMultiplicado;
-            
+        resumoTexto += pedidos.map((item, index) => {
+            const totalItem = item.total; 
+            let linha = `*1x* Salada #${index + 1} (${item.tamanho.nome}): `;
             let detalhes = [];
-            
+
             if (item.fruits.length) detalhes.push(`Frutas: ${item.fruits.map(f => f.nome).join(', ')}`);
-            if (item.extras.length) detalhes.push(`Adicionais: ${item.extras.map(e => e.nome).join(', ')}`);
+            if (item.extras.length) detalhes.push(`Adic: ${item.extras.map(e => e.nome).join(', ')}`);
             if (item.acomp.length) detalhes.push(`Acomp: ${item.acomp.map(a => a.nome).join(', ')}`);
             if (item.obs) detalhes.push(`Obs: ${item.obs}`);
             
-            resumoHTML += `
-                <li class="item-pedido">
-                    <div class="item-header">
-                        <span class="item-title">${item.quantity}x Salada ${item.tamanho.nome} #${index + 1}</span>
-                        <span class="item-price">${formatCurrency(totalMultiplicado)}</span>
-                    </div>
-                    <p class="item-details">${detalhes.join(' | ')}</p>
-                </li>
-            `;
-        });
-        
-        resumoHTML += '</ul>';
+            linha += detalhes.join(' | ') + ` - ${formatCurrency(totalItem)}`;
+            totalPedido += totalItem;
+            return linha;
+        }).join('\n\n'); 
 
-        // 3. Renderizar Resumo e Total
-        resumoContent.innerHTML = resumoHTML;
-        totalSpan.textContent = formatCurrency(totalPedido);
+        resumoPedidoDiv.textContent = resumoTexto;
+        totalAPagarDiv.textContent = 'TOTAL: ' + formatCurrency(totalPedido);
 
-        // 4. Listeners e Lógica de Confirmação
-        
-        // Listener para o botão de Confirmação (WhatsApp)
-        btnConfirmar.addEventListener('click', () => {
-            
-            const name = nameInput.value.trim();
-            const whatsapp = phoneInput.value.trim();
-            const neighborhood = neighborhoodInput.value.trim();
-            
-            if (!name || !whatsapp || !neighborhood) {
-                 alert('Por favor, preencha seu Nome, WhatsApp e Endereço para finalizar.');
-                 return;
+        // 5. LISTENERS
+        document.getElementById('enviarPedido').addEventListener('click', () => {
+             // 5.1 Validar campos
+            if (nameInput.value.trim() === '') {
+                alert('Por favor, preencha seu nome.');
+                return;
             }
+             // 5.2 Salvar Nome
+            localStorage.setItem('tropicanaName', nameInput.value.trim());
 
-            // 4.1 Salva os dados atualizados no LocalStorage (para a próxima vez)
-            localStorage.setItem('tropicanaName', name);
-            localStorage.setItem('tropicanaWhatsapp', whatsapp);
-            localStorage.setItem('tropicanaNeighborhood', neighborhood);
-
-            // 4.2 Gera o texto para o WhatsApp com a nova formatação
+            const totalPedido = calcularTotalGeral();
+            // 5.3 Gera o texto para o WhatsApp com a nova formatação
             let whatsappText = getWhatsappText(totalPedido);
 
             // ✅ REMOÇÃO DE EMOJIS (Para evitar caracteres estranhos na URL)
             whatsappText = whatsappText.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDC00-\uDFFF]|\u200D|\uFE0F/g, '');
 
 
-            // 4.3 Salva a mensagem no storage
+            // 5.4 Salva a mensagem no storage e redireciona para a tela de sucesso
             localStorage.setItem('pedidoWhatsApp', whatsappText);
 
-            // 4.4 Limpa o localStorage de pedido (mantém dados pessoais)
+            // 5.5 Limpa o localStorage de pedido (VOLTA À ESTACA ZERO)
             localStorage.removeItem('tropicanaPedidos');
+            localStorage.removeItem('tropicanaName');
             
-            // 4.5 Redireciona para a tela de sucesso
+            // 5.6 Redireciona para a tela de sucesso
             handlePageTransition('sucesso.html'); 
         });
 
         // Listener para o botão de Voltar
         document.getElementById('voltarMenu').addEventListener('click', () => {
-             // Salva os dados atuais antes de voltar
+             // Salva o nome antes de voltar
              localStorage.setItem('tropicanaName', nameInput.value.trim());
-             localStorage.setItem('tropicanaWhatsapp', phoneInput.value.trim());
-             localStorage.setItem('tropicanaNeighborhood', neighborhoodInput.value.trim());
              handlePageTransition('index.html');
         });
         
-        // Listeners para persistir dados no localStorage enquanto digita
+        // Listener para persistir nome no localStorage
         nameInput.addEventListener('input', () => localStorage.setItem('tropicanaName', nameInput.value.trim()));
-        phoneInput.addEventListener('input', () => localStorage.setItem('tropicanaWhatsapp', phoneInput.value.trim()));
-        neighborhoodInput.addEventListener('input', () => localStorage.setItem('tropicanaNeighborhood', neighborhoodInput.value.trim()));
     }
 
     document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('loaded');
-        initConfirmation();
+        loadAndDisplayOrder();
     });
-</script>
+  </script>
 </body>
 </html>
