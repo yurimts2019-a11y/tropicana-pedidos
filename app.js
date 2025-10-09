@@ -62,9 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentEditIndex = null; // Índice do item sendo editado (null se for novo)
 
     // Carrega dados do LocalStorage para preencher os inputs na inicialização
-    nameInput.value = localStorage.getItem('tropicanaName') || '';
-    whatsappInput.value = localStorage.getItem('tropicanaWhatsapp') || '';
-    neighborhoodInput.value = localStorage.getItem('tropicanaNeighborhood') || '';
+    // Estes IDs são usados na tela index.html e confirmacao.html
+    if(nameInput) nameInput.value = localStorage.getItem('tropicanaName') || '';
+    if(whatsappInput) whatsappInput.value = localStorage.getItem('tropicanaWhatsapp') || '';
+    if(neighborhoodInput) neighborhoodInput.value = localStorage.getItem('tropicanaNeighborhood') || '';
+
 
     // ===================================
     // 2. FUNÇÕES DE FIDELIDADE (WHATSAPP)
@@ -86,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const sealsGrid = document.getElementById('sealsGrid');
         const fidelityMessage = document.getElementById('fidelityMessage');
         const seals = getLoyaltyData(whatsappKey);
+        
+        if (!sealsGrid || !fidelityMessage) return; // Checa se os elementos existem
         
         let sealsHTML = '';
         for (let i = 1; i <= 10; i++) {
@@ -123,11 +127,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         whatsappInput.value = formattedWhatsapp;
 
-        if (whatsapp.length >= 11) {
-            cardContainer.style.display = 'block';
-            renderLoyaltySeals(whatsapp);
-        } else {
-            cardContainer.style.display = 'none';
+        if (cardContainer) {
+            if (whatsapp.length >= 11) {
+                cardContainer.style.display = 'block';
+                renderLoyaltySeals(whatsapp);
+            } else {
+                cardContainer.style.display = 'none';
+            }
         }
     }
 
@@ -149,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleSizeCardClick() {
         try {
             // Lê o objeto JSON diretamente do data-attribute
+            // A substituição de &quot; por \" é CRUCIAL para JSON em data-attributes
             const tamanho = JSON.parse(this.dataset.tamanho.replace(/&quot;/g, '\"'));
             openModal(tamanho);
         } catch (e) {
@@ -156,13 +163,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
-    // Renderiza os cards de tamanho na seção inicial
+    // Função principal que RENDERIZA AS OPÇÕES DE TAMANHO
     function renderizarSelecaoTamanho() {
         const container = document.getElementById('sizeSelectionContainer');
+        if (!container) return; // Sai se o container não existir
+        
         let html = '';
         tamanhos.forEach(tamanho => {
-            // Converte o objeto para JSON e escapa as aspas para o data-attribute
+            // Converte o objeto para JSON e escapa as aspas
             const tamanhoJson = JSON.stringify(tamanho).replace(/"/g, '&quot;');
             html += `
                 <div class="size-card" data-tamanho="${tamanhoJson}">
@@ -216,16 +224,18 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         });
         
-        cardsContainer.innerHTML = cardsHTML || '<p style="text-align:center; color:#767676; margin-top: 30px;">Adicione sua primeira Salada!</p>';
-        resumoContent.textContent = resumoText || 'Nenhuma Salada adicionada.';
+        if(cardsContainer) cardsContainer.innerHTML = cardsHTML || '<p class="empty-state">Seu carrinho está vazio. Comece a montar sua salada!</p>';
+        if(resumoContent) resumoContent.textContent = resumoText || 'Nenhuma Salada adicionada.';
         
-        footerTotal.textContent = `TOTAL: ${formatCurrency(totalPedido)}`;
-        footerConfirmar.disabled = pedidos.length === 0;
+        if(footerTotal) footerTotal.textContent = `TOTAL: ${formatCurrency(totalPedido)}`;
+        if(footerConfirmar) footerConfirmar.disabled = pedidos.length === 0;
 
         // Animação no Resumo
         const resumoBox = document.getElementById('resumoBox');
-        resumoBox.classList.remove('animate');
-        setTimeout(() => resumoBox.classList.add('animate'), 10); 
+        if(resumoBox) {
+            resumoBox.classList.remove('animate');
+            setTimeout(() => resumoBox.classList.add('animate'), 10); 
+        }
 
         localStorage.setItem('tropicanaPedidos', JSON.stringify(pedidos));
     }
@@ -243,6 +253,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
 
     function openModal(tamanho, index = null) {
+        if (!modalOverlay) return; // Sai se o modal não for encontrado
+
         currentEditIndex = index;
         
         if (index !== null) {
@@ -273,21 +285,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function closeModal() {
-        modalOverlay.classList.remove('open');
+        if(modalOverlay) modalOverlay.classList.remove('open');
         currentEditIndex = null;
     }
 
-    // **************************************************
     // FUNÇÃO QUE RENDERIZA AS OPÇÕES (CORRIGIDA)
-    // **************************************************
     function renderizarOpcoes() {
         const frutasOpcoes = document.getElementById('frutasOpcoes');
         const extrasOpcoes = document.getElementById('extrasOpcoes');
         const acompOpcoes = document.getElementById('acompOpcoes');
         
-        frutasOpcoes.innerHTML = renderGroup(fruits.map(nome => ({ nome, preco: 0 })), 'fruit', false); // Mapeia para objeto
+        if (!frutasOpcoes || !extrasOpcoes || !acompOpcoes) return; // Checagem vital
+        
+        frutasOpcoes.innerHTML = renderGroup(fruits.map(nome => ({ nome, preco: 0 })), 'fruit', false);
         extrasOpcoes.innerHTML = renderGroup(extras, 'extra', true);
-        acompOpcoes.innerHTML = renderGroup(acomp.map(nome => ({ nome, preco: 0 })), 'acomp', false); // Mapeia para objeto
+        acompOpcoes.innerHTML = renderGroup(acomp.map(nome => ({ nome, preco: 0 })), 'acomp', false);
 
         // Anexa listeners de input
         document.querySelectorAll('.opcoes input').forEach(input => {
@@ -303,12 +315,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         options.forEach(option => {
             const nome = option.nome || option;
-            const id = nome.toLowerCase().replace(/[^a-z0-9]/g, '-');
             const preco = hasPrice ? option.preco : 0;
             const isSelected = currentSelections.some(s => (s.nome || s) === nome);
             
             let isDisabled = false;
-            // Checagem de limite para desabilitar SE não estiver selecionado
             if (type === 'fruit' && !isSelected && currentItem.fruits.length >= FRUIT_LIMIT) {
                 isDisabled = true;
             }
@@ -317,9 +327,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const checkedAttr = isSelected ? 'checked' : '';
-            const typeAttr = (type === 'acomp') ? 'radio' : 'checkbox'; // Acompanhamento é Rádio
+            const typeAttr = (type === 'acomp') ? 'radio' : 'checkbox';
 
-            // Garante que o data-option contenha nome e preco
             const optionData = { nome: nome, preco: preco }; 
             const dataAttr = JSON.stringify(optionData).replace(/"/g, '&quot;');
             
@@ -344,12 +353,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const type = groupName.replace('Options', '');
         
         const optionData = JSON.parse(input.dataset.option.replace(/&quot;/g, '"'));
-        // Pega a referência para o array correto (fruits, extras, acomp)
         const targetArray = currentItem[`${type}s`] || currentItem[type]; 
         
         if (input.checked) {
             if (input.type === 'radio') {
-                targetArray.splice(0, targetArray.length); // Limpa para rádio
+                targetArray.splice(0, targetArray.length);
             }
             targetArray.push(optionData);
         } else {
@@ -359,7 +367,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Re-renderiza para atualizar o estado 'disabled'
         renderizarOpcoes();
 
         atualizarModalResumo();
@@ -389,26 +396,28 @@ document.addEventListener('DOMContentLoaded', function() {
             detalhes.push(`Acompanhamentos: ${currentItem.acomp.map(a => a.nome).join(', ')}`);
         }
         
-        currentItem.obs = obsInput.value.trim();
+        if(obsInput) currentItem.obs = obsInput.value.trim();
         if (currentItem.obs) {
             detalhes.push(`Obs: ${currentItem.obs}`);
         }
         
         currentItem.total = total;
-        currentItem.quantity = parseInt(quantityInput.value, 10) || 1;
+        if(quantityInput) currentItem.quantity = parseInt(quantityInput.value, 10) || 1;
         
-        document.getElementById('modalResumo').textContent = detalhes.join(' | ');
+        const modalResumoElement = document.getElementById('modalResumo');
+        if(modalResumoElement) modalResumoElement.textContent = detalhes.join(' | ');
         
         const totalFinal = currentItem.total * currentItem.quantity;
-        modalTotalSpan.textContent = formatCurrency(totalFinal);
+        if(modalTotalSpan) modalTotalSpan.textContent = formatCurrency(totalFinal);
         
-        if (currentEditIndex === null) {
-             addToOrderBtn.textContent = `Adicionar ao Pedido - ${formatCurrency(totalFinal)}`;
-        } else {
-             addToOrderBtn.textContent = `Salvar Alterações - ${formatCurrency(totalFinal)}`;
+        if(addToOrderBtn) {
+            if (currentEditIndex === null) {
+                 addToOrderBtn.textContent = `Adicionar ao Pedido - ${formatCurrency(totalFinal)}`;
+            } else {
+                 addToOrderBtn.textContent = `Salvar Alterações - ${formatCurrency(totalFinal)}`;
+            }
+            addToOrderBtn.disabled = currentItem.fruits.length === 0;
         }
-        
-        addToOrderBtn.disabled = currentItem.fruits.length === 0;
     }
 
     function addToOrder() {
@@ -444,11 +453,6 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('tropicanaName', name);
         localStorage.setItem('tropicanaWhatsapp', whatsapp);
         localStorage.setItem('tropicanaNeighborhood', neighborhood);
-        
-        // Lógica de Fidelidade: (Mantida apenas a estrutura para futuras atualizações)
-        if (whatsapp && whatsapp.length >= 11) {
-            // A lógica de adicionar o selo ocorre na tela de sucesso.
-        }
     }
 
     function enviarPedido() {
@@ -493,16 +497,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkStoreStatus() {
         const storeStatusElement = document.querySelector('.store-status');
         
+        if (!storeStatusElement) return; // Checa se o elemento existe
+        
         if (isStoreOpen()) {
             storeStatusElement.textContent = 'Aberto';
             storeStatusElement.style.backgroundColor = '#4CAF50';
             storeStatusElement.style.color = 'white';
-            footerConfirmar.disabled = pedidos.length === 0 ? true : false;
+            if(footerConfirmar) footerConfirmar.disabled = pedidos.length === 0 ? true : false;
         } else {
             storeStatusElement.textContent = 'Fechado';
             storeStatusElement.style.backgroundColor = '#F44336';
             storeStatusElement.style.color = 'white';
-            footerConfirmar.disabled = true;
+            if(footerConfirmar) footerConfirmar.disabled = true;
         }
     }
 
@@ -515,26 +521,27 @@ document.addEventListener('DOMContentLoaded', function() {
     window.editItem = editItem; 
     
     // Listeners do Modal
-    document.getElementById('closeModal').addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
+    if(document.getElementById('closeModal')) document.getElementById('closeModal').addEventListener('click', closeModal);
+    if(modalOverlay) modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
             closeModal();
         }
     });
-    addToOrderBtn.addEventListener('click', addToOrder);
-    obsInput.addEventListener('input', atualizarModalResumo);
-    quantityInput.addEventListener('input', atualizarModalResumo);
+    if(addToOrderBtn) addToOrderBtn.addEventListener('click', addToOrder);
+    // Campos que podem estar ausentes no index.html (como o obs e quantity)
+    if(obsInput) obsInput.addEventListener('input', atualizarModalResumo);
+    if(quantityInput) quantityInput.addEventListener('input', atualizarModalResumo);
 
     // Listeners de Input (Dados do Cliente)
-    nameInput.addEventListener('input', () => localStorage.setItem('tropicanaName', nameInput.value.trim()));
-    neighborhoodInput.addEventListener('input', () => localStorage.setItem('tropicanaNeighborhood', neighborhoodInput.value.trim()));
-    whatsappInput.addEventListener('input', updateLoyaltyCard);
+    if(nameInput) nameInput.addEventListener('input', () => localStorage.setItem('tropicanaName', nameInput.value.trim()));
+    if(neighborhoodInput) neighborhoodInput.addEventListener('input', () => localStorage.setItem('tropicanaNeighborhood', neighborhoodInput.value.trim()));
+    if(whatsappInput) whatsappInput.addEventListener('input', updateLoyaltyCard);
     
     // Listener do Footer
-    footerConfirmar.addEventListener('click', enviarPedido);
+    if(footerConfirmar) footerConfirmar.addEventListener('click', enviarPedido);
 
     // Inicialização
-    renderizarSelecaoTamanho();
+    renderizarSelecaoTamanho(); // ESTA É A FUNÇÃO CRUCIAL QUE RENDERIZA OS BOTÕES DE TAMANHO
     renderizarPedido(); 
     updateLoyaltyCard();
     checkStoreStatus();
