@@ -89,21 +89,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 4. FUNÇÕES DE UTILIDADE E STATUS
     
-    function checkStoreStatus() {
-        const now = new Date();
-        const hour = now.getHours();
-        
-        // Exemplo: Loja aberta das 10h às 22h
-        if (hour >= 10 && hour < 22) {
-            storeStatusSpan.textContent = 'Aberto Agora';
-            storeStatusSpan.style.backgroundColor = '#e8f5e9';
-            storeStatusSpan.style.color = '#2e7d32';
-        } else {
-            storeStatusSpan.textContent = 'Fechado';
-            storeStatusSpan.style.backgroundColor = '#fff3e0';
-            storeStatusSpan.style.color = 'var(--orange)';
-        }
+function checkStoreStatus() {
+    // Fuso horário de Cuiabá (MT)
+    const now = new Date();
+    const dataCuiaba = new Date(
+        now.toLocaleString('en-US', { timeZone: 'America/Cuiaba' })
+    );
+
+    const dia = dataCuiaba.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+    const hora = dataCuiaba.getHours();
+    const minuto = dataCuiaba.getMinutes();
+    const horaDecimal = hora + minuto / 60;
+
+    let aberto = false;
+
+    // Segunda (1) a Quinta (4): 13h às 22h
+    if (dia >= 1 && dia <= 4) {
+        if (horaDecimal >= 13 && horaDecimal < 22) aberto = true;
     }
+    // Sexta (5) e Domingo (0): 13h às 17h
+    else if (dia === 5 || dia === 0) {
+        if (horaDecimal >= 13 && horaDecimal < 17) aberto = true;
+    }
+    // Sábado (6): fechado
+    else if (dia === 6) {
+        aberto = false;
+    }
+
+    // Atualiza o status na interface
+    if (aberto) {
+        storeStatusSpan.textContent = 'Aberto Agora';
+        storeStatusSpan.style.backgroundColor = '#e8f5e9';
+        storeStatusSpan.style.color = '#2e7d32';
+    } else {
+        storeStatusSpan.textContent = 'Fechado';
+        storeStatusSpan.style.backgroundColor = '#fff3e0';
+        storeStatusSpan.style.color = 'var(--orange)';
+    }
+}
 
     // 5. FUNÇÕES DO MODAL
     function calcularTotal(item) {
