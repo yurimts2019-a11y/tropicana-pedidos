@@ -117,6 +117,7 @@ function checkStoreStatus() {
     }
 
     // Atualiza o status na interface
+ const statusText = document.getElementById('storeStatusText');
  if (aberto) {
     statusText.textContent = '🟢 Aberto Agora';
     storeStatusSpan.style.backgroundColor = '#e8f5e9';
