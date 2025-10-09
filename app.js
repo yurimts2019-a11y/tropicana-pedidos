@@ -117,14 +117,14 @@ function checkStoreStatus() {
     }
 
     // Atualiza o status na interface
-    if (aberto) {
-        storeStatusSpan.textContent = 'Aberto Agora';
-        storeStatusSpan.style.backgroundColor = '#e8f5e9';
-        storeStatusSpan.style.color = '#2e7d32';
-    } else {
-        storeStatusSpan.textContent = 'Fechado';
-        storeStatusSpan.style.backgroundColor = '#fff3e0';
-        storeStatusSpan.style.color = 'var(--orange)';
+ if (aberto) {
+    statusText.textContent = '🟢 Aberto Agora';
+    storeStatusSpan.style.backgroundColor = '#e8f5e9';
+    storeStatusSpan.style.color = '#2e7d32';
+} else {
+    statusText.textContent = '🔴 Fechado';
+    storeStatusSpan.style.backgroundColor = '#fff3e0';
+    storeStatusSpan.style.color = 'var(--orange)';
     }
 }
 
