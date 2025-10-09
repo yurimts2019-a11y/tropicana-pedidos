@@ -97,72 +97,79 @@
 // - Espaçamento excessivo removido
 // - Negrito mantido nos locais solicitados
 // ======================================================
+
 const getWhatsappText = (total) => {
-    // Recupera os pedidos do localStorage
     const pedidos = JSON.parse(localStorage.getItem('tropicanaPedidos')) || [];
     const name = localStorage.getItem('tropicanaName') || 'Cliente';
 
-    // 1. Início da Mensagem (NOVO FORMATO LIMPO COM NEGRITO NO TÍTULO E NOME)
-    let text = `*NOVO PEDIDO - DELÍCIAS TROPICANA*\n\n`; // Dupla quebra para separar o título da mensagem
-    text += `Meu nome é *${name.trim()}* e este é o meu pedido:\n\n`; // Dupla quebra para separar a introdução do primeiro item
+    let text = `*NOVO PEDIDO - DELÍCIAS TROPICANA*
+
+`;
+    text += `Meu nome é *${name.trim()}* e este é o meu pedido:
+
+`;
     
-    // 2. Loop pelos itens do pedido
     pedidos.forEach((item, index) => {
-        const precoUnitario = item.tamanho.preco;
-
-        // Título do Item - AGORA COM APENAS UMA QUEBRA DE LINHA NO FINAL
-        text += `ITEM ${index + 1}\n`; 
+        text += `*ITEM ${index + 1}:*
+`;
+        text += `Tamanho: ${item.tamanho.nome}
+`;
         
-        // Tamanho e Preço
-        text += `Tamanho: ${item.tamanho.nome} — ${formatCurrency(precoUnitario)}\n`;
-        
-        // Categoria 1: Frutas (Grátis)
         if (item.fruits && item.fruits.length > 0) {
-            // Usa dupla quebra para separar o item.tamanho da categoria
-            text += `\n*Frutas (Grátis):*\n`; 
+            text += `
+*Frutas:*
+`;
             item.fruits.forEach(fruta => {
-                text += `• ${fruta.nome}\n`;
+                text += `• ${fruta.nome}
+`;
             });
         }
 
-        // Categoria 2: Adicionais de Frutas (Extras Pagos)
         if (item.extras && item.extras.length > 0) {
-            text += `\n*Adicionais de Fruta (R$2,00 cada):*\n`; 
+            text += `
+*Adicionais:*
+`;
             item.extras.forEach(extra => {
-                text += `• ${extra.nome}\n`;
+                text += `• ${extra.nome}
+`;
             });
         }
 
-        // Categoria 3: Acompanhamentos (Grátis)
         if (item.acomp && item.acomp.length > 0) {
-            text += `\n*Acompanhamentos (Grátis):*\n`; 
+            text += `
+*Acompanhamentos:*
+`;
             item.acomp.forEach(acomp => {
-                // NOTA: Os seus acompanhamentos estavam usando '*' em vez de '•'. Mantenho o '*' se for sua preferência.
-                text += `* ${acomp.nome}\n`; 
+                text += `• ${acomp.nome}
+`;
             });
         }
-        
-        // Observação (Se existir)
+
         if (item.obs && item.obs.trim() !== '') {
-            const obsLimpa = item.obs.trim().replace(/\n/g, ' '); 
-            text += `\nObservação: ${obsLimpa}\n`;
+            const obsLimpa = item.obs.trim().replace(/
+/g, ' ');
+            text += `
+Observação: ${obsLimpa}
+`;
         }
-        
-        // Subtotal do Item - REMOVIDO ESPAÇO EXTRA ANTES, DEIXANDO APENAS UM NOVO PARÁGRAFO DE ESPAÇAMENTO
-        text += `\n*Subtotal: ${formatCurrency(item.total)}*\n`; 
-        
-        // Linha de separação entre itens
-        text += `---------------------------------\n`; 
+
+        text += `---------------------------------
+`;
     });
 
-    // 3. Rodapé
-    // Dupla quebra de linha para separar o rodapé do último item.
-    text += `\n\nAguardando a confirmação do pedido e o cálculo da taxa de entrega.\n\n`; 
-    text += `*Obrigado!*`; 
+    const totalPedido = pedidos.reduce((sum, item) => sum + item.total, 0);
+    const label = pedidos.length > 1 ? "saladas" : "salada";
+    text += `
+*Valor total das ${label}: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalPedido)}*
+`;
+    text += `
+Aguardando confirmação e cálculo da taxa de entrega.
 
-    // 4. Retorna a mensagem formatada
+*Obrigado!*`;
+
     return text;
 };
+
 
     function loadAndDisplayOrder() {
         
