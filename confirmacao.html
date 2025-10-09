@@ -160,6 +160,9 @@ const getWhatsappText = (total) => {
     text += `\n\nAguardando a confirmação do pedido e o cálculo da taxa de entrega.\n\n`; 
     text += `*Obrigado!*`; 
 
+    // ✅ NOVO TRECHO — Adiciona o valor total no final da mensagem do WhatsApp
+    text += `\n\n*Valor Total R$ ${total.toFixed(2).replace('.', ',')}*`;
+
     // 4. Retorna a mensagem formatada
     return text;
 };
