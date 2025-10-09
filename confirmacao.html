@@ -7,7 +7,7 @@
   <title>Confirmação de Pedido - Delícias Tropicana</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=14"> 
+  <link rel="stylesheet" href="style.css?v=15"> 
   
   <style>
     /* 1. Transição de Entrada da Página */
@@ -28,6 +28,87 @@
     .page-transition.fade-out {
         overflow: hidden; 
     }
+    
+    /* Estilos do Resumo da Confirmação */
+    .resumo-box ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .item-pedido {
+        border-bottom: 1px dashed #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    .item-pedido:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        color: var(--brown);
+        margin-bottom: 3px;
+    }
+    .item-details {
+        font-size: 0.8em;
+        color: var(--muted);
+        margin: 0;
+    }
+
+    /* Estilos do Footer de Confirmação */
+    .confirmation-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #eee;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 16px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        gap: 10px; 
+    }
+
+    .confirmation-actions .resumo-total {
+        font-size: 1.5em;
+        font-weight: 700;
+        color: var(--orange); 
+        text-align: center; 
+        width: 100%; 
+        padding-bottom: 5px;
+    }
+    
+    .btn-whatsapp {
+        background-color: #25D366; 
+        color: white;
+        font-weight: 700;
+        width: 100%; 
+        padding: 15px 20px;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.2s;
+    }
+
+    .btn-whatsapp:hover {
+        background-color: #128C7E;
+    }
+
+    .btn-voltar {
+        background: none;
+        color: var(--blue);
+        border: none;
+        font-size: 0.9em;
+        cursor: pointer;
+    }
+    
+    .container {
+        padding-bottom: 220px; /* Aumentado para acomodar o novo footer de ações */
+    }
   </style>
   
 </head>
@@ -35,37 +116,42 @@
   <main class="container">
     <section class="menu">
       <h2>✅ Quase lá! Confira seu Pedido:</h2>
+      <p style="color:var(--brown); font-size:1.1em; margin-bottom: 20px;">
+          Por favor, confira os dados de entrega e o resumo dos seus itens.
+      </p>
 
-      <div class="resumo-box section-card" id="resumoFinalContainer">
-          
-          <h3 class="section-title">Seu Nome:</h3>
-          <div class="campo"><span class="label">Nome</span>
-              <input type="text" id="nameInputFinal" placeholder="Ex.: Claudiane" required>
-          </div>
-          <hr style="margin: 20px 0; border: 0; border-top: 1px dashed #eee;">
-          
-          <h3 class="section-title">Resumo do Pedido:</h3>
-          <div id="resumoPedido" class="resumo-content"></div>
+      <h3>Seus Dados de Entrega</h3>
+      <section class="client-data-section">
+          <label class="campo"><span class="label">Seu Nome Completo *</span>
+              <input type="text" id="nameInput" placeholder="Ex: Maria da Silva" required>
+          </label>
+          <label class="campo"><span class="label">Seu WhatsApp (com DDD) *</span>
+              <input type="tel" id="whatsappInput" placeholder="(99) 99999-9999" required>
+          </label>
+          <label class="campo"><span class="label">Endereço/Bairro de Entrega *</span>
+              <input type="text" id="neighborhoodInput" placeholder="Ex: Rua X, 123 - Bairro Y" required>
+          </label>
+      </section>
 
-          <div class="confirmation-actions"> 
-              <div class="resumo-total-final resumo-total centralizado" id="totalAPagar"></div>
-
-              <button id="enviarPedido" class="btn btn-whatsapp">
-                  Enviar Pedido via WhatsApp
-              </button>
-              <button id="voltarMenu" class="btn btn-voltar">
-                  Voltar e Adicionar Mais Saladas
-              </button>
-          </div>
-
+      <h3>Resumo do Pedido</h3>
+      <div class="resumo-box" id="resumoBox">
+          <p><strong>Itens Selecionados:</strong></p>
+          <ul id="resumoContent">
+              <li style="text-align:center;">Carregando resumo...</li>
+          </ul> 
       </div>
+      
     </section>
   </main>
+  
+  <div class="confirmation-actions">
+      <div class="resumo-total">TOTAL A PAGAR: <span id="totalValue">R$0,00</span></div>
+      <button class="btn-whatsapp" id="btnConfirmarWhatsApp">CONFIRMAR E ENVIAR PEDIDO VIA WHATSAPP</button>
+      <button class="btn-voltar" id="voltarMenu">← ADICIONAR/EDITAR MAIS ITENS</button>
+  </div>
 
- <script>
-    // Configurações e Funções de Transição
-    const phone = '5565993321761'; // <-- Seu telefone, se for diferente, altere aqui!
-    
+
+<script>
     // Utility para formatar preço (i18n)
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('pt-BR', {
@@ -74,6 +160,7 @@
         }).format(value);
     };
 
+    // Função para gerenciar a transição (fade-out)
     function handlePageTransition(url) {
         document.documentElement.classList.add('fade-out');
         setTimeout(() => {
@@ -82,7 +169,7 @@
     }
     
     // =========================================================
-    // FUNÇÃO MODIFICADA PARA GERAÇÃO DE TEXTO DO WHATSAPP
+    // FUNÇÃO PARA GERAÇÃO DE TEXTO DO WHATSAPP (com pluralização)
     // =========================================================
     function getWhatsappText(totalPedido) {
         
@@ -133,7 +220,7 @@
             
             whatsappText += `\n`; // Adiciona uma linha em branco entre os itens
             
-            // **IMPORTANTE: REMOVIDA A LINHA COM O TOTAL UNITÁRIO DE CADA SALADA**
+            // **REMOVIDO: Linha com o total unitário do item**
         });
 
         // 3. Linha do Total Geral no final (AGORA COM PLURALIZAÇÃO)
@@ -143,9 +230,10 @@
     }
     // =========================================================
     
-    // Início do Script
+    // Início do Script de Inicialização da Confirmação
     function initConfirmation() {
         
+        // 1. Referências aos elementos HTML (Usando IDs CORRETOS)
         const nameInput = document.getElementById('nameInput');
         const phoneInput = document.getElementById('whatsappInput'); 
         const neighborhoodInput = document.getElementById('neighborhoodInput');
@@ -161,7 +249,7 @@
             return;
         }
 
-        // 1. Carregar Dados Pessoais e calcular Total
+        // 2. Carregar Dados Pessoais e calcular Total
         nameInput.value = localStorage.getItem('tropicanaName') || '';
         phoneInput.value = localStorage.getItem('tropicanaWhatsapp') || '';
         neighborhoodInput.value = localStorage.getItem('tropicanaNeighborhood') || '';
@@ -193,11 +281,11 @@
         
         resumoHTML += '</ul>';
 
-        // 2. Renderizar Resumo e Total
+        // 3. Renderizar Resumo e Total
         resumoContent.innerHTML = resumoHTML;
         totalSpan.textContent = formatCurrency(totalPedido);
 
-        // 3. Listeners
+        // 4. Listeners e Lógica de Confirmação
         
         // Listener para o botão de Confirmação (WhatsApp)
         btnConfirmar.addEventListener('click', () => {
@@ -211,26 +299,25 @@
                  return;
             }
 
-            // 3.1 Salva os dados atualizados no LocalStorage (para a próxima vez)
+            // 4.1 Salva os dados atualizados no LocalStorage (para a próxima vez)
             localStorage.setItem('tropicanaName', name);
             localStorage.setItem('tropicanaWhatsapp', whatsapp);
             localStorage.setItem('tropicanaNeighborhood', neighborhood);
 
-            // 3.2 Gera o texto para o WhatsApp com a nova formatação
+            // 4.2 Gera o texto para o WhatsApp com a nova formatação
             let whatsappText = getWhatsappText(totalPedido);
 
             // ✅ REMOÇÃO DE EMOJIS (Para evitar caracteres estranhos na URL)
             whatsappText = whatsappText.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDC00-\uDFFF]|\u200D|\uFE0F/g, '');
 
 
-            // 3.3 Salva a mensagem no storage e redireciona para a tela de sucesso
+            // 4.3 Salva a mensagem no storage
             localStorage.setItem('pedidoWhatsApp', whatsappText);
 
-            // 3.4 Limpa o localStorage de pedido (VOLTA À ESTACA ZERO)
+            // 4.4 Limpa o localStorage de pedido (mantém dados pessoais)
             localStorage.removeItem('tropicanaPedidos');
-            // Mantém os dados pessoais para o próximo pedido
             
-            // 3.5 Redireciona para a tela de sucesso
+            // 4.5 Redireciona para a tela de sucesso
             handlePageTransition('sucesso.html'); 
         });
 
