@@ -860,3 +860,52 @@ textarea.obs {
 .btn-voltar:hover {
     background-color: #1e88e5; /* Um tom de azul mais escuro no hover */
 }
+
+/* Rodapé fixo inferior (banner animado) */
+.footer-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--orange);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 1.2s ease-out;
+  z-index: 9999;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Rodapé institucional */
+.site-footer {
+  background: #fff3e0;
+  color: #333;
+  text-align: center;
+  padding: 25px 10px 70px; /* espaço extra por causa do fixo */
+  font-size: 0.95rem;
+  border-top: 2px solid #FFD700;
+}
+
+.site-footer a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-credit {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
