@@ -70,23 +70,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. FUNÇÕES DE FIDELIDADE (WHATSAPP)
     // ===================================
 
-    // Converte o WhatsApp limpo para a chave de fidelidade (pode ser o próprio número)
     const getClientKey = (whatsapp) => whatsapp.replace(/\D/g, ''); 
-
-    // Carrega o progresso de selos do cliente
     const getLoyaltyData = (key) => {
         const data = JSON.parse(localStorage.getItem('tropicanaLoyalty') || '{}');
         return data[key] || 0;
     };
-
-    // Salva o progresso de selos do cliente
     const saveLoyaltyData = (key, seals) => {
         const data = JSON.parse(localStorage.getItem('tropicanaLoyalty') || '{}');
         data[key] = seals;
         localStorage.setItem('tropicanaLoyalty', JSON.stringify(data));
     };
 
-    // Renderiza o cartão de selos
     function renderLoyaltySeals(whatsapp) {
         const whatsappKey = getClientKey(whatsapp);
         const sealsGrid = document.getElementById('sealsGrid');
@@ -100,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (i <= seals) {
                 classes += ' completed';
-                content = i < 10 ? '✅' : '🌟'; // Emoji para selo completo (1-9) ou prêmio (10)
+                content = i < 10 ? '✅' : '🌟';
             }
             if (i === 10) {
                 classes += ' reward';
@@ -110,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         sealsGrid.innerHTML = sealsHTML;
 
-        // Atualiza a mensagem de status
         if (seals >= 10) {
             fidelityMessage.textContent = '🥳 Parabéns! Você já ganhou um prêmio na próxima compra!';
         } else {
@@ -118,12 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Listener principal para o campo do WhatsApp
     function updateLoyaltyCard() {
         const whatsapp = whatsappInput.value.trim().replace(/\D/g, '');
         const cardContainer = document.getElementById('loyaltyCardContainer');
         
-        // Formata o número (opcional, mas melhora a UX)
         let formattedWhatsapp = whatsapp;
         if (whatsapp.length > 2 && whatsapp.length <= 7) {
             formattedWhatsapp = `(${whatsapp.substring(0, 2)}) ${whatsapp.substring(2)}`;
@@ -144,6 +135,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
     // 3. RENDERIZAÇÃO E ATUALIZAÇÃO GERAL
     // ===================================
+
+    // Anexa listeners aos cards de tamanho
+    function attachSizeCardListeners() {
+        document.querySelectorAll('.size-card').forEach(card => {
+            // Remove o listener anterior para evitar duplicidade
+            card.removeEventListener('click', handleSizeCardClick);
+            card.addEventListener('click', handleSizeCardClick);
+        });
+    }
+
+    // Função de tratamento de clique isolada
+    function handleSizeCardClick() {
+        try {
+            // Lê o objeto JSON diretamente do data-attribute
+            const tamanho = JSON.parse(this.dataset.tamanho.replace(/&quot;/g, '\"'));
+            openModal(tamanho);
+        } catch (e) {
+            console.error("Erro ao processar dados do cartão de tamanho:", e);
+        }
+    }
+
 
     // Renderiza os cards de tamanho na seção inicial
     function renderizarSelecaoTamanho() {
@@ -176,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const totalMultiplicado = item.total * item.quantity;
             totalPedido += totalMultiplicado;
 
-            // Formata o resumo para o resumoText (Resumo do Pedido para o WhatsApp)
+            // Formata o resumo para o resumoText
             let detalhesText = [];
             if (item.fruits.length) detalhesText.push(item.fruits.map(f => f.nome).join(', '));
             if (item.extras.length) detalhesText.push(`+ ${item.extras.map(e => e.nome).join(', ')}`);
@@ -213,10 +225,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Animação no Resumo
         const resumoBox = document.getElementById('resumoBox');
         resumoBox.classList.remove('animate');
-        // Usa setTimeout para garantir que a classe seja removida e adicionada novamente
         setTimeout(() => resumoBox.classList.add('animate'), 10); 
 
-        // Salva apenas o array de pedidos (dados do cliente são salvos no envio)
         localStorage.setItem('tropicanaPedidos', JSON.stringify(pedidos));
     }
 
@@ -232,18 +242,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // 4. LÓGICA DO MODAL DE CUSTOMIZAÇÃO
     // ===================================
 
-    // Inicializa o modal com um item novo ou para edição
     function openModal(tamanho, index = null) {
         currentEditIndex = index;
         
         if (index !== null) {
-            // Modo Edição: Carrega o item existente
-            currentItem = JSON.parse(JSON.stringify(pedidos[index])); // Deep copy
+            currentItem = JSON.parse(JSON.stringify(pedidos[index]));
             document.getElementById('modalTitle').textContent = `Editar Salada #${index + 1}`;
             addToOrderBtn.textContent = 'Salvar Alterações';
             quantityInput.value = currentItem.quantity;
         } else {
-            // Modo Novo: Inicia novo item com base no tamanho
             currentItem = {
                 tamanho: tamanho,
                 fruits: [],
@@ -251,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 acomp: [],
                 obs: '',
                 quantity: 1,
-                total: tamanho.preco // Preço base inicial
+                total: tamanho.preco
             };
             document.getElementById('modalTitle').textContent = `Personalize sua Salada (${tamanho.nome})`;
             addToOrderBtn.textContent = `Adicionar ao Pedido - ${formatCurrency(currentItem.total)}`;
@@ -259,29 +266,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         obsInput.value = currentItem.obs;
-        renderizarOpcoes(); // Renderiza todas as opções (frutas, extras, acomp)
-        atualizarModalResumo(); // Atualiza o resumo inicial e o total
+        renderizarOpcoes();
+        atualizarModalResumo();
         
         modalOverlay.classList.add('open');
     }
 
-    // Fecha o modal e limpa o estado de edição
     function closeModal() {
         modalOverlay.classList.remove('open');
         currentEditIndex = null;
     }
 
-    // Renderiza os chips de opções
+    // **************************************************
+    // FUNÇÃO QUE RENDERIZA AS OPÇÕES (CORRIGIDA)
+    // **************************************************
     function renderizarOpcoes() {
         const frutasOpcoes = document.getElementById('frutasOpcoes');
         const extrasOpcoes = document.getElementById('extrasOpcoes');
         const acompOpcoes = document.getElementById('acompOpcoes');
         
-        frutasOpcoes.innerHTML = renderGroup(fruits, 'fruit', false);
+        frutasOpcoes.innerHTML = renderGroup(fruits.map(nome => ({ nome, preco: 0 })), 'fruit', false); // Mapeia para objeto
         extrasOpcoes.innerHTML = renderGroup(extras, 'extra', true);
-        acompOpcoes.innerHTML = renderGroup(acomp, 'acomp', false);
+        acompOpcoes.innerHTML = renderGroup(acomp.map(nome => ({ nome, preco: 0 })), 'acomp', false); // Mapeia para objeto
 
-        // Anexa listeners de input para atualizar o estado e o resumo
+        // Anexa listeners de input
         document.querySelectorAll('.opcoes input').forEach(input => {
             input.removeEventListener('change', handleOptionChange);
             input.addEventListener('change', handleOptionChange);
@@ -299,8 +307,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const preco = hasPrice ? option.preco : 0;
             const isSelected = currentSelections.some(s => (s.nome || s) === nome);
             
-            // Checagem de limite para desabilitar opções se o limite FRUIT_LIMIT foi atingido
             let isDisabled = false;
+            // Checagem de limite para desabilitar SE não estiver selecionado
             if (type === 'fruit' && !isSelected && currentItem.fruits.length >= FRUIT_LIMIT) {
                 isDisabled = true;
             }
@@ -309,14 +317,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const checkedAttr = isSelected ? 'checked' : '';
-            const typeAttr = (type === 'tamanho' || type === 'acomp') ? 'radio' : 'checkbox';
-            const priceHtml = hasPrice ? `<span class="chip-price">+${formatCurrency(preco)}</span>` : '';
-            
-            const optionData = { nome, preco, id };
+            const typeAttr = (type === 'acomp') ? 'radio' : 'checkbox'; // Acompanhamento é Rádio
+
+            // Garante que o data-option contenha nome e preco
+            const optionData = { nome: nome, preco: preco }; 
             const dataAttr = JSON.stringify(optionData).replace(/"/g, '&quot;');
             
+            const priceHtml = hasPrice && preco > 0 ? `<span class="chip-price">+${formatCurrency(preco)}</span>` : '';
+            
             html += `
-                <label class="${isDisabled ? 'disabled' : ''}">
+                <label class="option-item ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}">
                     <input type="${typeAttr}" name="${type}Options" value="${nome}" data-option='${dataAttr}' ${checkedAttr} ${isDisabled ? 'disabled' : ''}>
                     <span class="chip-content">
                         ${nome}
@@ -328,53 +338,43 @@ document.addEventListener('DOMContentLoaded', function() {
         return html;
     }
 
-    // Trata a mudança de seleção de frutas, extras e acomp
     function handleOptionChange(event) {
         const input = event.target;
         const groupName = input.name;
         const type = groupName.replace('Options', '');
         
-        // Pega o objeto de dados da opção
         const optionData = JSON.parse(input.dataset.option.replace(/&quot;/g, '"'));
-        const targetArray = currentItem[`${type}s`] || currentItem[type]; // Ex: currentItem.fruits
+        // Pega a referência para o array correto (fruits, extras, acomp)
+        const targetArray = currentItem[`${type}s`] || currentItem[type]; 
         
         if (input.checked) {
-            // Adicionar a opção
-            // Para Rádio (ex: acomp), limpa o array antes de adicionar
             if (input.type === 'radio') {
-                targetArray.splice(0, targetArray.length);
+                targetArray.splice(0, targetArray.length); // Limpa para rádio
             }
             targetArray.push(optionData);
         } else {
-            // Remover a opção (apenas para checkbox)
             const index = targetArray.findIndex(item => (item.nome || item) === optionData.nome);
             if (index > -1) {
                 targetArray.splice(index, 1);
             }
         }
 
-        // Para evitar bugs de limite, é bom re-renderizar o grupo que tem limite (frutas e extras)
-        if (type === 'fruit' || type === 'extra') {
-            renderizarOpcoes();
-        }
+        // Re-renderiza para atualizar o estado 'disabled'
+        renderizarOpcoes();
 
         atualizarModalResumo();
     }
     
-    // Calcula o total e atualiza o resumo dentro do modal
     function atualizarModalResumo() {
         if (!currentItem || !currentItem.tamanho) return;
         
         let total = currentItem.tamanho.preco;
-        let resumoText = `*Tamanho:* ${currentItem.tamanho.nome}\n`;
         let detalhes = [];
         
-        // Adicionais de Frutas (Extras)
         currentItem.extras.forEach(extra => {
             total += extra.preco;
         });
         
-        // Construção do resumo
         if (currentItem.fruits.length > 0) {
             detalhes.push(`Frutas: ${currentItem.fruits.map(f => f.nome).join(', ')}`);
         } else {
@@ -394,14 +394,11 @@ document.addEventListener('DOMContentLoaded', function() {
             detalhes.push(`Obs: ${currentItem.obs}`);
         }
         
-        // Atualiza a propriedade total do item
         currentItem.total = total;
         currentItem.quantity = parseInt(quantityInput.value, 10) || 1;
         
-        // Renderiza o resumo no modal
         document.getElementById('modalResumo').textContent = detalhes.join(' | ');
         
-        // Atualiza o total final no botão
         const totalFinal = currentItem.total * currentItem.quantity;
         modalTotalSpan.textContent = formatCurrency(totalFinal);
         
@@ -411,54 +408,49 @@ document.addEventListener('DOMContentLoaded', function() {
              addToOrderBtn.textContent = `Salvar Alterações - ${formatCurrency(totalFinal)}`;
         }
         
-        // Bloqueia o botão se as regras básicas não forem atendidas
         addToOrderBtn.disabled = currentItem.fruits.length === 0;
     }
 
-    // 5. Adicionar ou Salvar Item
     function addToOrder() {
         if (currentItem.fruits.length === 0) {
             alert('Você precisa selecionar pelo menos uma fruta.');
             return;
         }
         
-        // Se estiver editando, substitui o item existente
         if (currentEditIndex !== null) {
-            pedidos[currentEditIndex] = JSON.parse(JSON.stringify(currentItem)); // Deep copy
+            pedidos[currentEditIndex] = JSON.parse(JSON.stringify(currentItem));
         } else {
-            // Se for um novo item, adiciona ao array
-            pedidos.push(JSON.parse(JSON.stringify(currentItem))); // Deep copy
+            pedidos.push(JSON.parse(JSON.stringify(currentItem)));
         }
         
         closeModal();
         renderizarPedido();
     }
 
+    function editItem(index) {
+        openModal(pedidos[index].tamanho, index);
+    }
+
     // ===================================
     // 6. SALVAMENTO E ENVIO
     // ===================================
 
-    // FUNÇÃO CORRIGIDA: SALVA TODOS OS DADOS NO LOCALSTORAGE
     function saveToLocalStorage() {
-        // Pega os valores dos inputs de Nome, WhatsApp e Endereço
         const name = nameInput.value.trim();
         const whatsapp = whatsappInput.value.trim();
         const neighborhood = neighborhoodInput.value.trim();
 
-        // Salva os dados do cliente para a tela de confirmação ler
         localStorage.setItem('tropicanaPedidos', JSON.stringify(pedidos));
         localStorage.setItem('tropicanaName', name);
         localStorage.setItem('tropicanaWhatsapp', whatsapp);
         localStorage.setItem('tropicanaNeighborhood', neighborhood);
         
-        // Lógica de Fidelidade: Adiciona selo por pedido (será consumido na tela de sucesso)
+        // Lógica de Fidelidade: (Mantida apenas a estrutura para futuras atualizações)
         if (whatsapp && whatsapp.length >= 11) {
-            // A lógica de adicionar o selo **DEVE** ocorrer na tela de **SUCESSO** após a confirmação.
-            // Aqui, apenas garantimos que os dados do cliente foram salvos.
+            // A lógica de adicionar o selo ocorre na tela de sucesso.
         }
     }
 
-    // FUNÇÃO CORRIGIDA: DE ENVIO DO PEDIDO
     function enviarPedido() {
         
         if (pedidos.length === 0) {
@@ -475,10 +467,8 @@ document.addEventListener('DOMContentLoaded', function() {
              return;
         }
         
-        // 1. Salva os dados no localStorage ANTES de ir para a próxima tela
         saveToLocalStorage(); 
         
-        // 2. Redireciona para a tela de confirmação
         handlePageTransition('confirmacao.html');
     }
 
@@ -488,10 +478,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isStoreOpen() {
         const now = new Date();
-        const day = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+        const day = now.getDay();
         const hour = now.getHours();
         
-        // Exemplo: Aberto de Segunda a Sábado, das 10h às 22h
+        // Exemplo: Aberto de Segunda a Sábado (1-6), das 10h às 22h
         const openHour = 10;
         const closeHour = 22;
 
@@ -505,12 +495,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (isStoreOpen()) {
             storeStatusElement.textContent = 'Aberto';
-            storeStatusElement.style.backgroundColor = '#4CAF50'; // Verde
+            storeStatusElement.style.backgroundColor = '#4CAF50';
             storeStatusElement.style.color = 'white';
             footerConfirmar.disabled = pedidos.length === 0 ? true : false;
         } else {
             storeStatusElement.textContent = 'Fechado';
-            storeStatusElement.style.backgroundColor = '#F44336'; // Vermelho
+            storeStatusElement.style.backgroundColor = '#F44336';
             storeStatusElement.style.color = 'white';
             footerConfirmar.disabled = true;
         }
@@ -521,7 +511,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 8. LISTENERS E INICIALIZAÇÃO
     // ===================================
 
-    // Expondo funções globais
     window.excluirItem = excluirItem; 
     window.editItem = editItem; 
     
@@ -537,11 +526,8 @@ document.addEventListener('DOMContentLoaded', function() {
     quantityInput.addEventListener('input', atualizarModalResumo);
 
     // Listeners de Input (Dados do Cliente)
-    // Salva os dados do cliente no LocalStorage ao digitar (UX)
     nameInput.addEventListener('input', () => localStorage.setItem('tropicanaName', nameInput.value.trim()));
     neighborhoodInput.addEventListener('input', () => localStorage.setItem('tropicanaNeighborhood', neighborhoodInput.value.trim()));
-    
-    // Listener do WhatsApp (formatação e cartão fidelidade)
     whatsappInput.addEventListener('input', updateLoyaltyCard);
     
     // Listener do Footer
@@ -549,10 +535,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicialização
     renderizarSelecaoTamanho();
-    renderizarPedido(); // Carrega pedidos e total na inicialização
-    updateLoyaltyCard(); // Atualiza o cartão fidelidade se o WhatsApp estiver preenchido
-    
-    // Checagem de Status
+    renderizarPedido(); 
+    updateLoyaltyCard();
     checkStoreStatus();
-    setInterval(checkStoreStatus, 60000); // Checa o status a cada minuto
+    setInterval(checkStoreStatus, 60000);
 });
