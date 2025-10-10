@@ -15,3 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.style.opacity = '0.6';
   });
 });
+
+
+// Incluir observações na mensagem do WhatsApp
+try {
+  const obs = localStorage.getItem('observacoes');
+  if (obs && mensagemWhatsApp) {
+    mensagemWhatsApp += "\n📝 Observações: " + obs;
+  }
+} catch (e) {
+  console.log('Erro ao incluir observações:', e);
+}

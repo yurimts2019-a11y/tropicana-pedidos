@@ -68,3 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+// Capturar observações e salvar no localStorage
+document.addEventListener('DOMContentLoaded', function() {
+  const obsInput = document.getElementById('obsInput');
+  if (obsInput) {
+    obsInput.addEventListener('input', function() {
+      localStorage.setItem('observacoes', obsInput.value);
+    });
+  }
+});

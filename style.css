@@ -892,3 +892,35 @@ textarea.obs {
   font-size: 0.85rem;
   opacity: 0.8;
 }
+
+/* ======================================= */
+/* NOVO: ESTILOS PARA CAMPO DE OBSERVAÇÕES E CHIP */
+/* ======================================= */
+.text-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 80px; /* Altura mínima */
+}
+
+/* Ajuste a margem para o grupo que contém o textarea */
+.grupo-opcoes:has(.text-input) { 
+    margin-bottom: 20px;
+}
+
+/* Estilo para o chip de Observações no resumo */
+.chip-obs {
+    display: block; /* Ocupa a linha inteira */
+    background-color: var(--blue); /* Usa o azul para destaque */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    font-weight: 500;
+    white-space: pre-wrap; /* Preserva formatação e quebras de linha */
+}

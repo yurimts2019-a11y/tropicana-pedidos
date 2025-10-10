@@ -46,5 +46,18 @@
       }
     }, 3000);
   </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const resumoContainer = document.querySelector('.resumo') || document.body;
+  const obs = localStorage.getItem('observacoes');
+  if (obs && obs.trim() !== '') {
+    const obsDiv = document.createElement('div');
+    obsDiv.innerHTML = '<h3>📝 Observações</h3><p>' + obs + '</p>';
+    resumoContainer.appendChild(obsDiv);
+  }
+});
+</script>
 </body>
+
 </html>
