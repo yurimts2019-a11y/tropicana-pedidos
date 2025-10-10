@@ -892,30 +892,3 @@ textarea.obs {
   font-size: 0.85rem;
   opacity: 0.8;
 }
-
-/* ======================================= */
-/* MODO LOJA FECHADA (cinza estilo iFood)  */
-/* ======================================= */
-body.loja-fechada {
-  filter: grayscale(1);
-  opacity: 0.8;
-  pointer-events: none; /* Bloqueia cliques */
-}
-
-body.loja-fechada .store-status {
-  background: #e0e0e0 !important;
-  color: #555 !important;
-}
-
-body.loja-fechada .size-card,
-body.loja-fechada .btn,
-body.loja-fechada .order-card {
-  cursor: not-allowed !important;
-  opacity: 0.6 !important;
-}
-
-body.loja-fechada #confirmarPedidoResumo {
-  background: #ccc !important;
-  color: #777 !important;
-  cursor: not-allowed !important;
-}
