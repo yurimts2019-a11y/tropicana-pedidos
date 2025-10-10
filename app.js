@@ -116,16 +116,16 @@ function checkStoreStatus() {
         aberto = false;
     }
 
-    // Atualiza o status na interface
-    if (aberto) {
-        storeStatusSpan.textContent = 'Aberto Agora';
-        storeStatusSpan.style.backgroundColor = '#e8f5e9';
-        storeStatusSpan.style.color = '#2e7d32';
-    } else {
-        storeStatusSpan.textContent = 'Fechado';
-        storeStatusSpan.style.backgroundColor = '#fff3e0';
-        storeStatusSpan.style.color = 'var(--orange)';
-    }
+if (aberto) {
+    storeStatusSpan.textContent = 'Aberto Agora';
+    storeStatusSpan.style.backgroundColor = '#e8f5e9';
+    storeStatusSpan.style.color = '#2e7d32';
+    document.body.classList.remove('loja-fechada');
+} else {
+    storeStatusSpan.textContent = 'Fechado';
+    storeStatusSpan.style.backgroundColor = '#f0f0f0';
+    storeStatusSpan.style.color = '#666';
+    document.body.classList.add('loja-fechada');
 }
 
     // 5. FUNÇÕES DO MODAL
