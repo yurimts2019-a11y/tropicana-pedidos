@@ -531,4 +531,4 @@ if (aberto) {
     checkStoreStatus();
     setInterval(checkStoreStatus, 60000);
     loadFromLocalStorage(); // <--- CARREGA O PEDIDO SALVO AO INICIAR
-});
+};
