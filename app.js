@@ -109,7 +109,7 @@ function checkStoreStatus() {
     }
     // Sexta (5) e Domingo (0): 13h às 17h
     else if (dia === 5 || dia === 0) {
-        if (horaDecimal >= 13 && horaDecimal < 17) aberto = true;
+        if (horaDecimal >= 06 && horaDecimal < 17) aberto = true;
     }
     // Sábado (6): fechado
     else if (dia === 6) {
