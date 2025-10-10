@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nome: '300ml (P)', 
             preco: 16, 
             id: 'tam-p', 
-            description: '🍓Pequena na medida,gigante no sabor!', 
+            description: '🍓Pequena na medida, gigante no sabor!', 
             imageURL: 'salada_300ml.jpg' // 🚨 Mude para o nome real da sua imagem
         },
         { 
