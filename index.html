@@ -1,42 +1,76 @@
 <!doctype html>
 <html lang="pt-BR" class="page-transition">
 <head>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Delícias Tropicana - Menu</title>
   
   <link rel="manifest" href="/manifest.json">
-
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=14"> 
+  <link rel="stylesheet" href="style.css?v=15"> 
   
-  <style>
-    /* 1. Transição de Entrada da Página */
-    .fade-page {
-        opacity: 0;
-        transition: opacity 0.3s ease-in;
-    }
-    .fade-page.loaded {
-        opacity: 1;
-    }
-    
-    /* 2. Transição de Saída (Ao clicar para mudar de página) */
-    .page-transition.fade-out .fade-page {
-        opacity: 0;
-        transition: opacity 0.3s ease-out;
-    }
-    /* 3. Evita que o scroll apareça durante a transição */
-    .page-transition.fade-out {
-        overflow: hidden; 
-    }
-  </style>
+<style>
+  /* ===============================
+     ANIMAÇÃO DE ENTRADA (SPLASH)
+  =============================== */
+  #splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFD21E; /* 🎨 amarelo exato da logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeOutSplash 1s ease 2.8s forwards;
+  }
+
+  #splash-screen img {
+    width: 170px;
+    animation: logoBounce 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.15));
+  }
+
+  @keyframes logoBounce {
+    0%, 100% { transform: scale(1) translateY(0); }
+    30% { transform: scale(1.15) translateY(-10px); }
+    50% { transform: scale(0.95) translateY(5px); }
+    70% { transform: scale(1.05) translateY(-5px); }
+  }
+
+  @keyframes fadeOutSplash {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  /* ===============================
+     TRANSIÇÃO DE CONTEÚDO
+  =============================== */
+  .fade-page {
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+  }
+  .fade-page.loaded {
+      opacity: 1;
+  }
+
+  .page-transition.fade-out .fade-page {
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+  }
+
+  .page-transition.fade-out {
+      overflow: hidden; 
+  }
+</style>
+
+<div id="splash-screen">
+  <img src="logo.png" alt="Delícias Tropicana"> 
+</div>
   
-</head>
-<body class="fade-page">
-  
- <header class="main-header">
+  <header class="main-header">
     <div class="banner-image">
       <img src="image_2d4108.jpg" alt="Banner de Frutas Delícias Tropicana" loading="lazy">
     </div>
@@ -48,9 +82,9 @@
       <div class="delivery-details">
         <span>🕒 60-75min</span>
         <span>🛵 Consulte a taxa de entrega!</span>
-      <a href="https://www.instagram.com/deliciastropicana" class="more-details" target="_blank">
-  <strong>@deliciastropicana</strong>
-</a>
+        <a href="https://www.instagram.com/deliciastropicana" class="more-details" target="_blank">
+          <strong>@deliciastropicana</strong>
+        </a>
       </div>
     </div>
   </header>
