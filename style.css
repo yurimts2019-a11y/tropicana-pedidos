@@ -1009,3 +1009,49 @@ body.store-closed #closed-overlay {
     padding: 10px 20px;
   }
 }
+
+/* ======================================= */
+/* ESTILOS E ANIMAÇÃO PARA STATUS DA LOJA */
+/* ======================================= */
+
+/* Estilo Base para Status Fechado */
+.store-status.closed {
+    background-color: var(--color-alert); /* Vermelho */
+    color: white;
+}
+
+/* Estilo Base para Status Aberto (Sem Animação) */
+.store-status.open {
+    background-color: var(--color-success); /* Verde */
+    color: white;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+/* -------------------------------------- */
+/* ANIMAÇÃO MODERNA DE PULSAÇÃO (BLINK)   */
+/* -------------------------------------- */
+
+/* 1. Aplica a animação ao status aberto */
+.store-status.open-animated {
+    /* Animação que alterna o tamanho e a sombra */
+    animation: statusPulse 2.5s infinite ease-in-out;
+}
+
+/* 2. Keyframes da Animação de Pulsação */
+@keyframes statusPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Sombra inicial transparente */
+    }
+    50% {
+        transform: scale(1.05); /* Levemente maior */
+        box-shadow: 0 0 15px 5px rgba(76, 175, 80, 0); /* Sombra mais forte, transparente */
+    }
+    70% {
+        box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.2); /* Sombra que pulsa */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Volta à sombra inicial */
+    }
+}

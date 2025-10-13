@@ -63,6 +63,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Acompanhamentos (Grátis)
     const acomp = ['Creme de Maracujá', 'Creme de Ninho', 'Granola', 'Mel', 'Aveia'];
+    
+    // NOVO: 1.2 DADOS DO HORÁRIO DE FUNCIONAMENTO (Baseado no rodapé do index.html)
+    const storeHours = [
+        { day: 1, open: 13, close: 22 }, // Segunda (13:00h - 22:00h)
+        { day: 2, open: 13, close: 22 }, // Terça
+        { day: 3, open: 13, close: 22 }, // Quarta
+        { day: 4, open: 13, close: 22 }, // Quinta
+        { day: 5, open: 13, close: 17 }, // Sexta (13:00h - 17:00h)
+        { day: 6, open: 0, close: 0 },   // Sábado (Fechado)
+        { day: 0, open: 0, close: 0 }    // Domingo (Fechado)
+    ];
+
 
     // 2. REFERÊNCIAS DO DOM
     const cardsContainer = document.getElementById('cardsContainer');
@@ -89,40 +101,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 4. FUNÇÕES DE UTILIDADE E STATUS
     
+    // ✅ FUNÇÃO ATUALIZADA PARA IMPLEMENTAR A LÓGICA DE HORÁRIO E ANIMAÇÃO
+    function checkStoreStatus() {
+        const now = new Date();
+        
+        // Simulação de fuso horário de Cuiabá. Se o servidor for GMT, isso é necessário.
+        // Se o servidor já estiver em Cuiabá/Brasília, pode usar 'now' diretamente.
+        // Vou usar a lógica de fuso horário para garantir a precisão.
+        const dataCuiaba = new Date(
+            now.toLocaleString('en-US', { timeZone: 'America/Cuiaba' })
+        );
 
-function checkStoreStatus() {
-  const now = new Date();
-  const dataCuiaba = new Date(
-    now.toLocaleString('en-US', { timeZone: 'America/Cuiaba' })
-  );
+        const day = dataCuiaba.getDay(); // 0 (Domingo) a 6 (Sábado)
+        const currentHour = dataCuiaba.getHours();
+        const currentMinute = dataCuiaba.getMinutes();
+        const currentTimeInMinutes = currentHour * 60 + currentMinute;
 
-  const dia = dataCuiaba.getDay();
-  const hora = dataCuiaba.getHours();
-  const minuto = dataCuiaba.getMinutes();
-  const horaDecimal = hora + minuto / 60;
+        const statusElement = document.getElementById('storeStatus');
+        const closedOverlay = document.getElementById('closed-overlay');
+        const body = document.body;
 
-  let aberto = false;
+        const todayHours = storeHours.find(h => h.day === day);
 
-  if (dia >= 1 && dia <= 4) {
-    if (horaDecimal >= 13 && horaDecimal < 22) aberto = true;
-  } else if (dia === 5 || dia === 0) {
-    if (horaDecimal >= 13 && horaDecimal < 17) aberto = true;
-  }
+        // Se não houver horário configurado para o dia ou se for 00:00h - 00:00h
+        if (!todayHours || (todayHours.open === 0 && todayHours.close === 0)) {
+            // Lógica para dia fechado (Sábado e Domingo no seu caso)
+            storeStatusSpan.textContent = 'Fechado';
+            storeStatusSpan.className = 'store-status closed';
+            body.classList.add('store-closed');
+            closedOverlay.style.display = 'flex';
+            return;
+        }
 
-  const storeStatusSpan = document.querySelector('.store-status');
-
-  if (aberto) {
-    storeStatusSpan.textContent = 'Aberto Agora';
-    storeStatusSpan.style.backgroundColor = '#e8f5e9';
-    storeStatusSpan.style.color = '#2e7d32';
-    document.body.classList.remove('store-closed');
-  } else {
-    storeStatusSpan.textContent = 'Fechado';
-    storeStatusSpan.style.backgroundColor = '#fff3e0';
-    storeStatusSpan.style.color = 'var(--orange)';
-    document.body.classList.add('store-closed');
-  }
-}
+        const openTimeInMinutes = todayHours.open * 60;
+        const closeTimeInMinutes = todayHours.close * 60;
+        
+        // Verifica se está dentro do horário
+        if (currentTimeInMinutes >= openTimeInMinutes && currentTimeInMinutes < closeTimeInMinutes) {
+            // ✅ MUDANÇA 1: Exibe o horário de fechamento com a formatação (ex: 17:00h)
+            const closeHour = String(todayHours.close).padStart(2, '0');
+            const closeTime = `${closeHour}:00h`; // O seu array usa horas cheias
+            
+            storeStatusSpan.textContent = `Aberto até ${closeTime}`;
+            
+            // ✅ MUDANÇA 2: Adiciona a classe de animação 'open-animated'
+            storeStatusSpan.className = 'store-status open open-animated'; 
+            
+            body.classList.remove('store-closed');
+            closedOverlay.style.display = 'none';
+        } else {
+            // Lógica para horário fechado
+            storeStatusSpan.textContent = 'Fechado';
+            storeStatusSpan.className = 'store-status closed';
+            body.classList.add('store-closed');
+            closedOverlay.style.display = 'flex';
+        }
+        
+        // A lógica de estilo de cor foi movida para o style.css, usando as classes 'open' e 'closed'
+    }
 
 
     // 5. FUNÇÕES DO MODAL
@@ -205,7 +241,7 @@ function checkStoreStatus() {
             
             // Adiciona listener ao input (se alguém clicar especificamente nele)
             itemDiv.querySelector('input[type="checkbox"]').addEventListener('change', () => {
-                     handleOptionToggle(nome, tipo); 
+                        handleOptionToggle(nome, tipo); 
             });
             
             container.appendChild(itemDiv);
@@ -489,7 +525,8 @@ function checkStoreStatus() {
         }
         
         // Atualiza o estado de disabled
-        const isAberto = storeStatusSpan.textContent.includes('Aberto');
+        // Usa a classe 'open' para checar o status correto (que agora é definido pela checkStoreStatus)
+        const isAberto = storeStatusSpan.classList.contains('open'); 
         btnConfirmar.disabled = !isAberto;
         btnConfirmar.textContent = isAberto ? 'Confirmar Pedido' : 'Loja Fechada';
     }
@@ -540,6 +577,6 @@ function checkStoreStatus() {
     // Inicialização
     renderizarSelecaoTamanho();
     checkStoreStatus();
-    setInterval(checkStoreStatus, 60000);
+    setInterval(checkStoreStatus, 60000); // Checa a cada minuto
     loadFromLocalStorage(); // <--- CARREGA O PEDIDO SALVO AO INICIAR
 });
