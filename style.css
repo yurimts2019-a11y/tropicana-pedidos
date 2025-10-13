@@ -924,3 +924,88 @@ textarea.obs {
     font-weight: 500;
     white-space: pre-wrap; /* Preserva formatação e quebras de linha */
 }
+
+
+
+/* ======================================= */
+/* MODO CINZA E OVERLAY QUANDO FECHADO     */
+/* ======================================= */
+body.store-closed {
+  filter: grayscale(100%) brightness(0.9);
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden; /* impede rolagem quando fechado */
+  height: 100vh;
+}
+
+#closed-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+body.store-closed #closed-overlay {
+  display: flex;
+  pointer-events: all;
+}
+
+#closed-overlay h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#closed-overlay p {
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+#closed-overlay .btn {
+  background: #ff9800;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+#closed-overlay .btn:hover {
+  background: #e68900;
+}
+
+/* 📱 Centralização garantida no mobile */
+@media (max-width: 600px) {
+  #closed-overlay {
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  #closed-overlay h2 {
+    font-size: 1.6rem;
+  }
+
+  #closed-overlay p {
+    font-size: 1rem;
+  }
+
+  #closed-overlay .btn {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+}

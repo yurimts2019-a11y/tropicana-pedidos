@@ -89,46 +89,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 4. FUNÇÕES DE UTILIDADE E STATUS
     
+
 function checkStoreStatus() {
-    // Fuso horário de Cuiabá (MT)
-    const now = new Date();
-    const dataCuiaba = new Date(
-        now.toLocaleString('en-US', { timeZone: 'America/Cuiaba' })
-    );
+  const now = new Date();
+  const dataCuiaba = new Date(
+    now.toLocaleString('en-US', { timeZone: 'America/Cuiaba' })
+  );
 
-    const dia = dataCuiaba.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
-    const hora = dataCuiaba.getHours();
-    const minuto = dataCuiaba.getMinutes();
-    const horaDecimal = hora + minuto / 60;
+  const dia = dataCuiaba.getDay();
+  const hora = dataCuiaba.getHours();
+  const minuto = dataCuiaba.getMinutes();
+  const horaDecimal = hora + minuto / 60;
 
-    let aberto = false;
+  let aberto = false;
 
-    // Segunda (1) a Quinta (4): 13h às 22h
-    if (dia >= 1 && dia <= 4) {
-        if (horaDecimal >= 13 && horaDecimal < 22) aberto = true;
-    }
-    // Sexta (5) e Domingo (0): 13h às 17h
-    else if (dia === 5 || dia === 0) {
-        // Correção: Se for domingo (0), pode abrir às 13h
-        // Sua regra original para Domingo (0) e Sexta (5) era 13h-17h. Usei 10h-17h, vou reverter para 13h-17h
-        if (horaDecimal >= 10 && horaDecimal < 17) aberto = true; 
-    }
-    // Sábado (6): fechado
-    else if (dia === 6) {
-        aberto = false;
-    }
+  if (dia >= 1 && dia <= 4) {
+    if (horaDecimal >= 13 && horaDecimal < 22) aberto = true;
+  } else if (dia === 5 || dia === 0) {
+    if (horaDecimal >= 13 && horaDecimal < 17) aberto = true;
+  }
 
-    // Atualiza o status na interface
-    if (aberto) {
-        storeStatusSpan.textContent = 'Aberto Agora';
-        storeStatusSpan.style.backgroundColor = '#e8f5e9';
-        storeStatusSpan.style.color = '#2e7d32';
-    } else {
-        storeStatusSpan.textContent = 'Fechado';
-        storeStatusSpan.style.backgroundColor = '#fff3e0';
-        storeStatusSpan.style.color = 'var(--orange)';
-    }
+  const storeStatusSpan = document.querySelector('.store-status');
+
+  if (aberto) {
+    storeStatusSpan.textContent = 'Aberto Agora';
+    storeStatusSpan.style.backgroundColor = '#e8f5e9';
+    storeStatusSpan.style.color = '#2e7d32';
+    document.body.classList.remove('store-closed');
+  } else {
+    storeStatusSpan.textContent = 'Fechado';
+    storeStatusSpan.style.backgroundColor = '#fff3e0';
+    storeStatusSpan.style.color = 'var(--orange)';
+    document.body.classList.add('store-closed');
+  }
 }
+
 
     // 5. FUNÇÕES DO MODAL
     function calcularTotal(item) {
