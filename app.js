@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const storeHours = [
         { day: 1, open: 13, close: 22 }, // Segunda (13:00h - 22:00h)
         { day: 2, open: 13, close: 22 }, // Terça
-        { day: 3, open: 13, close: 22 }, // Quarta
+        { day: 3, open: 09, close: 22 }, // Quarta
         { day: 4, open: 13, close: 22 }, // Quinta
         { day: 5, open: 13, close: 17 }, // Sexta (13:00h - 17:00h)
         { day: 6, open: 0, close: 0 },   // Sábado (Fechado)
