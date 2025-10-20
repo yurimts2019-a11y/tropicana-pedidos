@@ -1,20 +1,20 @@
 :root{
-  --bg:#FFFDE7;
-  --card:#ffffff;
-  --color-success:#4caf50;   /* VERDE ESCURO (Para Títulos e Nomes) */
-  --color-alert:#e53935;     /* VERMELHO (Para Preços e Alertas) */
-  --color-lime-light:#cddc39; /* VERDE LIMÃO (Para Botão Confirmar) */
-  --color-lime-dark:#afb42b;  /* VERDE LIMÃO ESCURO (Para Botão Confirmar) */
-  --blue:#2196f3;
-  --brown:#795548;
-  --orange:#ff9800;
-  --muted:#767676;
-  --accent:#ffb74d;
-  --max-width:900px;
-  /* Cores para Destaque dos Chips/Items */
-  --chip-fruit: #ff5722; 
-  --chip-extra: #1e88e5; 
-  --chip-acomp: #66bb6a; 
+  --bg:#FFFDE7;
+  --card:#ffffff;
+  --color-success:#4caf50;   /* VERDE ESCURO (Para Títulos e Nomes) */
+  --color-alert:#e53935;     /* VERMELHO (Para Preços e Alertas) */
+  --color-lime-light:#cddc39; /* VERDE LIMÃO (Para Botão Confirmar) */
+  --color-lime-dark:#afb42b;  /* VERDE LIMÃO ESCURO (Para Botão Confirmar) */
+  --blue:#2196f3;
+  --brown:#795548;
+  --orange:#ff9800;
+  --muted:#767676;
+  --accent:#ffb74d;
+  --max-width:900px;
+  /* Cores para Destaque dos Chips/Items */
+  --chip-fruit: #ff5722; 
+  --chip-extra: #1e88e5; 
+  --chip-acomp: #66bb6a; 
 }
 
 *{box-sizing:border-box}
@@ -27,9 +27,9 @@ button:focus,
 input:focus,
 textarea:focus,
 .option-item:focus { /* Foco no item da lista */
-    outline: 2px solid var(--orange); 
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline: 2px solid var(--orange); 
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 
@@ -42,67 +42,67 @@ textarea:focus,
 /* NOVO CSS PARA O HEADER COM BANNER E LOGO */
 /* ======================================= */
 .main-header {
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
-    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    margin-bottom: 20px;
 }
 
 .banner-image img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
 }
 
 .logo-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #fff;
-    padding: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin: -50px auto 10px;
-    position: relative;
-    z-index: 10;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin: -50px auto 10px;
+    position: relative;
+    z-index: 10;
 }
 
 .logo-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
 }
 
 .store-info {
-    text-align: center;
-    padding-bottom: 15px;
+    text-align: center;
+    padding-bottom: 15px;
 }
 
 .store-status {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    font-size: 0.9em;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 0.9em;
 }
 
 .delivery-details {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: 0.9em;
-    color: var(--muted);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.9em;
+    color: var(--muted);
 }
 
 .delivery-details strong {
-  font-weight: 700;
+  font-weight: 700;
 }
 
 .more-details {
-  color: #3f51b5;
-  text-decoration: none;
-  font-weight: 500;
+  color: #3f51b5;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 
@@ -113,57 +113,57 @@ textarea:focus,
 /* REMOVIDO: Estilo genérico do h2 */
 
 .menu {
-    padding-bottom: 100px; /* Espaço para o footer se fosse fixo */
+    padding-bottom: 100px; /* Espaço para o footer se fosse fixo */
 }
 
 .section-card {
-    background: var(--card);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .section-title {
-    color: var(--color-success);
-    border-bottom: 2px solid #ffe0e0;
-    padding-bottom: 10px;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.2em;
+    color: var(--color-success);
+    border-bottom: 2px solid #ffe0e0;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2em;
 }
 
 /* ======================================= */
 /* NOVO ESTILO: TÍTULO MODERNO */
 /* ======================================= */
 .modern-title-container {
-    text-align: center;
-    margin: 15px 0 25px; /* Ajusta a margem superior */
-    padding: 15px 10px;
-    border-radius: 12px;
-    background: #e8f5e9; /* Fundo verde muito claro */
-    border: 1px solid #c8e6c9; 
-    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.1);
+    text-align: center;
+    margin: 15px 0 25px; /* Ajusta a margem superior */
+    padding: 15px 10px;
+    border-radius: 12px;
+    background: #e8f5e9; /* Fundo verde muito claro */
+    border: 1px solid #c8e6c9; 
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.1);
 }
 
 .modern-title-text {
-    color: var(--color-success); /* VERDE ESCURO */
-    font-size: 2.2em;
-    font-weight: 900;
-    margin: 0 0 5px 0;
-    text-shadow: 2px 2px 0 rgba(76, 175, 80, 0.1); 
-    line-height: 1.1;
+    color: var(--color-success); /* VERDE ESCURO */
+    font-size: 2.2em;
+    font-weight: 900;
+    margin: 0 0 5px 0;
+    text-shadow: 2px 2px 0 rgba(76, 175, 80, 0.1); 
+    line-height: 1.1;
 }
 
 .modern-subtitle {
-    font-size: 1.1em;
-    color: #555;
-    font-weight: 500;
-    margin: 0;
-    padding: 8px 10px 0;
-    border-top: 3px solid var(--color-lime-light); /* Linha de destaque VERDE LIMÃO */
-    display: inline-block;
-    letter-spacing: 0.5px;
+    font-size: 1.1em;
+    color: #555;
+    font-weight: 500;
+    margin: 0;
+    padding: 8px 10px 0;
+    border-top: 3px solid var(--color-lime-light); /* Linha de destaque VERDE LIMÃO */
+    display: inline-block;
+    letter-spacing: 0.5px;
 }
 /* ======================================= */
 
@@ -172,109 +172,109 @@ textarea:focus,
 /* SELEÇÃO DE TAMANHO (NOVO LAYOUT VERTICAL)*/
 /* ======================================= */
 .size-selection-container {
-    display: flex;
-    flex-direction: column; /* Força os cards a ficarem um abaixo do outro */
-    gap: 15px;
+    display: flex;
+    flex-direction: column; /* Força os cards a ficarem um abaixo do outro */
+    gap: 15px;
 }
 
 .size-card {
-    background: var(--card); 
-    border: 3px solid transparent;
-    border-radius: 12px;
-    padding: 0;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    
-    /* Layout horizontal: imagem e texto lado a lado */
-    display: flex; 
-    overflow: hidden; 
-    flex: 1 1 100%;
-    max-width: 100%;
+    background: var(--card); 
+    border: 3px solid transparent;
+    border-radius: 12px;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    
+    /* Layout horizontal: imagem e texto lado a lado */
+    display: flex; 
+    overflow: hidden; 
+    flex: 1 1 100%;
+    max-width: 100%;
 }
 
 .size-card:hover, .size-card:focus {
-    border-color: var(--orange);
-    box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+    border-color: var(--orange);
+    box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
 }
 
 .card-image-wrapper {
-    flex-shrink: 0; 
-    width: 150px; /* Largura fixa para a imagem no desktop */
-    min-height: 100%;
+    flex-shrink: 0; 
+    width: 150px; /* Largura fixa para a imagem no desktop */
+    min-height: 100%;
 }
 
 .card-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    /* Arredondamento da imagem na lateral esquerda */
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Arredondamento da imagem na lateral esquerda */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .card-content {
-    padding: 15px;
-    flex-grow: 1;
-    display: flex; 
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 15px;
+    flex-grow: 1;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
 }
 
 .size-name {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: var(--color-success); /* VERDE ESCURO */
-    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--color-success); /* VERDE ESCURO */
+    margin: 0;
 }
 
 .size-price {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: var(--color-alert); /* VERMELHO */
-    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--color-alert); /* VERMELHO */
+    margin: 0;
 }
 
 .size-description {
-    font-size: 0.9em;
-    color: #555;
-    margin: 5px 0 15px 0;
+    font-size: 0.9em;
+    color: #555;
+    margin: 5px 0 15px 0;
 }
 
 .btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    text-align: center;
 }
 
 .btn.small-btn {
-    padding: 6px 10px;
-    font-size: 0.9em;
-    background-color: var(--orange);
-    color: #fff;
-    width: auto;
-    max-width: 150px;
-    margin-top: auto; /* Empurra o botão para o fundo */
-    align-self: flex-start; /* Alinha o botão à esquerda dentro do container */
+    padding: 6px 10px;
+    font-size: 0.9em;
+    background-color: #FFEB3B; /* MODIFICADO: Amarelo da Logo */
+    color: #000000; /* MODIFICADO: Cor do texto para preto (melhor contraste) */
+    width: auto;
+    max-width: 150px;
+    margin-top: auto; /* Empurra o botão para o fundo */
+    align-self: flex-start; /* Alinha o botão à esquerda dentro do container */
 }
 
 .btn.small-btn:hover {
-    background-color: #fb8c00;
+    background-color: #FFD740; /* MODIFICADO: Tom de amarelo um pouco mais escuro para o hover */
 }
 
 
@@ -282,368 +282,368 @@ textarea:focus,
 /* MODAL/TELA CHEIA DE CUSTOMIZAÇÃO */
 /* ======================================= */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg); /* Cor de fundo mais clara para tela inteira */
-    display: none;
-    justify-content: center;
-    align-items: flex-start; /* Alinha o conteúdo ao topo (tela inteira) */
-    z-index: 1000;
-    overflow-y: auto; /* Permite rolar se o conteúdo for maior que a tela */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg); /* Cor de fundo mais clara para tela inteira */
+    display: none;
+    justify-content: center;
+    align-items: flex-start; /* Alinha o conteúdo ao topo (tela inteira) */
+    z-index: 1000;
+    overflow-y: auto; /* Permite rolar se o conteúdo for maior que a tela */
 }
 
 body.modal-open {
-    overflow: hidden; 
+    overflow: hidden; 
 }
 
 .modal-content {
-    background: var(--card);
-    width: 100%;
-    max-width: var(--max-width);
-    padding: 20px;
-    /* Remove os arredondamentos para a tela inteira */
-    border-radius: 0; 
-    box-shadow: none; /* Remove a sombra de modal flutuante */
-    position: relative;
-    min-height: 100vh; /* Garante que o conteúdo preencha a tela */
-    
-    /* Nova animação de Fade-in */
-    animation: fadeIn 0.3s ease-out forwards;
+    background: var(--card);
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 20px;
+    /* Remove os arredondamentos para a tela inteira */
+    border-radius: 0; 
+    box-shadow: none; /* Remove a sombra de modal flutuante */
+    position: relative;
+    min-height: 100vh; /* Garante que o conteúdo preencha a tela */
+    
+    /* Nova animação de Fade-in */
+    animation: fadeIn 0.3s ease-out forwards;
 }
 
 /* Animação de Fade-in para a tela cheia */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .close-modal {
-    position: fixed; /* Mudei para 'fixed' para acompanhar a rolagem */
-    top: 15px;
-    right: 15px;
-    background: var(--color-success); /* VERDE ESCURO */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 1em;
-    cursor: pointer;
-    line-height: 30px;
-    padding: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    z-index: 1001; /* Garante que fique acima de tudo */
+    position: fixed; /* Mudei para 'fixed' para acompanhar a rolagem */
+    top: 15px;
+    right: 15px;
+    background: var(--color-success); /* VERDE ESCURO */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1em;
+    cursor: pointer;
+    line-height: 30px;
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 1001; /* Garante que fique acima de tudo */
 }
 
 .close-modal:hover {
-    background: #388e3c; /* VERDE MAIS ESCURO */
+    background: #388e3c; /* VERDE MAIS ESCURO */
 }
 
 .modal-content h3 {
-    color: var(--color-success); /* VERDE ESCURO */
-    border-bottom: 1px dashed #eee;
-    padding-bottom: 10px;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.4em;
+    color: var(--color-success); /* VERDE ESCURO */
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.4em;
 }
 
 .custom-options {
-    margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .categoria-title {
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #333;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 /* -------------------------------------- */
 /* NOVO ESTILO: LISTA DE OPÇÕES (MODERNO) */
 /* -------------------------------------- */
 .opcoes {
-    display: flex;
-    flex-direction: column;
-    gap: 0; 
-    padding: 0;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0; 
+    padding: 0;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .option-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 15px;
-    margin: 0;
-    border-bottom: 1px solid #f0f0f0;
-    cursor: pointer;
-    transition: all 0.2s;
-    background-color: var(--card);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin: 0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: var(--card);
 }
 
 /* Tira a borda do último item */
 .option-item:last-child {
-    border-bottom: none;
+    border-bottom: none;
 }
 
 .option-item:hover {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
 
 /* Estilo para a opção selecionada */
 .option-item.selected {
-    font-weight: 600;
-    background-color: #f7f7f7;
-    border-left: 4px solid var(--color-alert); /* VERMELHO */
+    font-weight: 600;
+    background-color: #f7f7f7;
+    border-left: 4px solid var(--color-alert); /* VERMELHO */
 }
 
 /* Estilo do texto */
 .option-label {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    cursor: pointer;
-    padding-right: 15px; /* Espaço antes do checkbox */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    cursor: pointer;
+    padding-right: 15px; /* Espaço antes do checkbox */
 }
 
 .option-name {
-    font-size: 1em;
-    color: #333;
+    font-size: 1em;
+    color: #333;
 }
 
 .option-price {
-    font-size: 0.8em;
-    color: var(--orange);
-    font-weight: 500;
+    font-size: 0.8em;
+    color: var(--orange);
+    font-weight: 500;
 }
 
 /* Estilo para item desabilitado */
 .option-item.disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    background-color: var(--card);
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--card);
 }
 .option-item.disabled:hover {
-    background-color: var(--card);
+    background-color: var(--card);
 }
 
 /* CUSTOM CHECKBOX (mais limpo e moderno) */
 .option-item input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 15px;
-    transition: all 0.2s;
-    flex-shrink: 0;
-    position: relative;
-    top: 0;
-    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    position: relative;
+    top: 0;
+    background-color: #fff;
 }
 
 .option-item input[type="checkbox"]:checked {
-    border-color: var(--color-alert); /* VERMELHO */
-    background-color: var(--color-alert); /* VERMELHO */
+    border-color: var(--color-alert); /* VERMELHO */
+    background-color: var(--color-alert); /* VERMELHO */
 }
 
 .option-item input[type="checkbox"]:checked::after {
-    content: '✓';
-    color: white;
-    font-size: 14px;
-    line-height: 18px;
-    display: block;
-    text-align: center;
-    font-weight: 900;
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    line-height: 18px;
+    display: block;
+    text-align: center;
+    font-weight: 900;
 }
 
 
 /* CORES POR CATEGORIA (Borda Lateral e Checkbox) */
 .opcoes-frutas .option-item.selected {
-    border-left-color: var(--chip-fruit);
+    border-left-color: var(--chip-fruit);
 }
 .opcoes-frutas input[type="checkbox"]:checked {
-    border-color: var(--chip-fruit);
-    background-color: var(--chip-fruit);
+    border-color: var(--chip-fruit);
+    background-color: var(--chip-fruit);
 }
 
 .opcoes-extras .option-item.selected {
-    border-left-color: var(--chip-extra);
+    border-left-color: var(--chip-extra);
 }
 .opcoes-extras input[type="checkbox"]:checked {
-    border-color: var(--chip-extra);
-    background-color: var(--chip-extra);
+    border-color: var(--chip-extra);
+    background-color: var(--chip-extra);
 }
 
 .opcoes-acomp .option-item.selected {
-    border-left-color: var(--chip-acomp);
+    border-left-color: var(--chip-acomp);
 }
 .opcoes-acomp input[type="checkbox"]:checked {
-    border-color: var(--chip-acomp);
-    background-color: var(--chip-acomp);
+    border-color: var(--chip-acomp);
+    background-color: var(--chip-acomp);
 }
 /* -------------------------------------- */
 
 
 .preview-box {
-    background: #fff3e0;
-    border: 1px solid var(--orange);
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 20px;
+    background: #fff3e0;
+    border: 1px solid var(--orange);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
 }
 
 .preview-box p {
-    margin-top: 0;
-    font-weight: 600;
-    color: #555;
+    margin-top: 0;
+    font-weight: 600;
+    color: #555;
 }
 
 .preview-box .resumo-content {
-    white-space: pre-wrap;
-    font-family: inherit;
-    font-size: 0.9em;
-    color: #333;
-    line-height: 1.4;
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: 0.9em;
+    color: #333;
+    line-height: 1.4;
 }
 
 .btn.adicionar {
-    background: linear-gradient(45deg, var(--color-alert), #c62828); /* VERMELHO */
-    color: white;
-    padding: 12px 20px;
-    font-size: 1.1em;
-    margin-top: 20px;
-    box-shadow: 0 4px 10px rgba(229, 57, 53, 0.4); /* Sombra vermelha */
+    background: linear-gradient(45deg, var(--color-alert), #c62828); /* VERMELHO */
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(229, 57, 53, 0.4); /* Sombra vermelha */
 }
 
 .btn.adicionar:hover {
-    background: linear-gradient(45deg, #c62828, #b71c1c); /* VERMELHO MAIS ESCURO */
+    background: linear-gradient(45deg, #c62828, #b71c1c); /* VERMELHO MAIS ESCURO */
 }
 
 /* Inputs de Observações e Nome/Bairro */
 .campo {
-    display: block;
-    margin-bottom: 15px;
+    display: block;
+    margin-bottom: 15px;
 }
 
 .label {
-    display: block;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 5px;
-    font-size: 0.9em;
+    display: block;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    font-size: 0.9em;
 }
 
 input[type="text"],
 textarea.obs {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 1em;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
 }
 
 input[type="text"]:focus,
 textarea.obs:focus {
-    border-color: var(--orange);
+    border-color: var(--orange);
 }
 
 textarea.obs {
-    resize: vertical;
+    resize: vertical;
 }
 
 /* ======================================= */
 /* CARDS DO PEDIDO (INDEX.HTML) */
 /* ======================================= */
 .cards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .order-card {
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    border-left: 5px solid var(--orange);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid var(--orange);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px dashed #eee;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 .order-title {
-    font-weight: 700;
-    color: #333;
-    font-size: 1.1em;
+    font-weight: 700;
+    color: #333;
+    font-size: 1.1em;
 }
 
 .order-price {
-    font-weight: 700;
-    color: var(--color-success); /* VERDE ESCURO */
-    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--color-success); /* VERDE ESCURO */
+    font-size: 1.2em;
 }
 
 .order-details p {
-    margin: 3px 0;
-    font-size: 0.9em;
-    color: #555;
+    margin: 3px 0;
+    font-size: 0.9em;
+    color: #555;
 }
 
 .order-obs {
-    font-style: italic;
-    color: #777 !important;
+    font-style: italic;
+    color: #777 !important;
 }
 
 .order-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-    justify-content: flex-end;
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    justify-content: flex-end;
 }
 
 .order-actions .btn {
-    width: auto;
-    padding: 5px 10px;
-    font-size: 0.85em;
-    border-radius: 6px;
-    box-shadow: none;
+    width: auto;
+    padding: 5px 10px;
+    font-size: 0.85em;
+    border-radius: 6px;
+    box-shadow: none;
 }
 
 .editar-item {
-    background-color: var(--blue);
-    color: white;
+    background-color: var(--blue);
+    color: white;
 }
 .editar-item:hover {
-    background-color: #1e88e5;
+    background-color: #1e88e5;
 }
 
 .excluir-item {
-    background-color: #777;
-    color: white;
+    background-color: #777;
+    color: white;
 }
 .excluir-item:hover {
-    background-color: #555;
+    background-color: #555;
 }
 
 
@@ -651,37 +651,37 @@ textarea.obs {
 /* RESUMO GERAL (INDEX.HTML) */
 /* ======================================= */
 .resumo-box {
-    margin-top: 20px;
-    transition: transform 0.3s ease-out;
+    margin-top: 20px;
+    transition: transform 0.3s ease-out;
 }
 
 .resumo-box.animate {
-    /* Efeito sutil ao atualizar */
-    animation: pulse 0.3s ease-in-out; 
+    /* Efeito sutil ao atualizar */
+    animation: pulse 0.3s ease-in-out; 
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.01); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+  100% { transform: scale(1); }
 }
 
 .resumo-box .resumo-content {
-    white-space: pre-wrap;
-    font-family: monospace; /* Fonte mono para alinhamento */
-    font-size: 0.9em;
-    color: #333;
-    padding: 10px;
-    background: #fafafa;
-    border-radius: 8px;
-    border: 1px dashed #e0e0e0;
+    white-space: pre-wrap;
+    font-family: monospace; /* Fonte mono para alinhamento */
+    font-size: 0.9em;
+    color: #333;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px dashed #e0e0e0;
 }
 
 /* ======================================= */
 /* BARRA FIXA (REMOVIDA E OCULTADA) */
 /* ======================================= */
 .footer-bar {
-  display: none !important; 
+  display: none !important; 
 }
 
 /* ======================================= */
@@ -690,324 +690,324 @@ textarea.obs {
 
 /* Container de ações dentro da resumo-box (Total + Confirmar) */
 .resumo-box .resumo-actions {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 10px !important;
-  margin-top: 15px !important;
-  padding-top: 10px !important;
-  border-top: 1px dashed #e0e0e0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 15px !important;
+  padding-top: 10px !important;
+  border-top: 1px dashed #e0e0e0 !important;
 }
 
 /* Estilo para o total final na caixa de resumo */
 .resumo-total-final {
-    font-size: 1.4rem !important;
-    font-weight: 700 !important;
-    color: var(--color-success) !important; /* VERDE ESCURO */
-    text-shadow: none !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    color: var(--color-success) !important; /* VERDE ESCURO */
+    text-shadow: none !important;
 }
 
 
 /* Garante que o botão Confirmar na caixa de resumo tenha o estilo correto */
 .resumo-box button#confirmarPedidoResumo {
-    background: linear-gradient(135deg, var(--color-lime-light), var(--color-lime-dark)); /* VERDE LIMÃO */
-    color: #333; /* Cor do texto mais escura para melhor contraste */
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    padding: 10px 20px;
-    font-size: 15px;
-    box-shadow: 0 4px 8px rgba(175, 180, 43, 0.4); /* Sombra em tom de limão */
-    width: auto !important;
-    margin: 0 !important;
+    background: linear-gradient(135deg, var(--color-lime-light), var(--color-lime-dark)); /* VERDE LIMÃO */
+    color: #333; /* Cor do texto mais escura para melhor contraste */
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 15px;
+    box-shadow: 0 4px 8px rgba(175, 180, 43, 0.4); /* Sombra em tom de limão */
+    width: auto !important;
+    margin: 0 !important;
 }
 
 .resumo-box button#confirmarPedidoResumo:disabled {
-  background: #e0e0e0 !important;
-  color: #999 !important;
-  cursor: not-allowed;
-  box-shadow: none !important;
+  background: #e0e0e0 !important;
+  color: #999 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
 }
 
 
 /* RESPONSIVIDADE */
 @media (max-width: 600px) {
-    .container {
-        padding: 0 10px;
-        margin-top: 20px;
-    }
-    
-    .delivery-details {
-      flex-direction: column;
-      gap: 5px;
-      font-size: 0.8em;
-    }
-    
-    .modern-title-text {
-        font-size: 1.8em;
-    }
-    
-    .modern-subtitle {
-        font-size: 1em;
-    }
+    .container {
+        padding: 0 10px;
+        margin-top: 20px;
+    }
+    
+    .delivery-details {
+      flex-direction: column;
+      gap: 5px;
+      font-size: 0.8em;
+    }
+    
+    .modern-title-text {
+        font-size: 1.8em;
+    }
+    
+    .modern-subtitle {
+        font-size: 1em;
+    }
 
-    /* Modal/Tela Cheia de Customização no Mobile */
-    .modal-content {
-        padding: 15px;
-        min-height: 100vh; /* Garante que preenche a altura total */
-    }
+    /* Modal/Tela Cheia de Customização no Mobile */
+    .modal-content {
+        padding: 15px;
+        min-height: 100vh; /* Garante que preenche a altura total */
+    }
 
-    .close-modal {
-        top: 10px;
-        right: 10px;
-        z-index: 1002;
-    }
+    .close-modal {
+        top: 10px;
+        right: 10px;
+        z-index: 1002;
+    }
 
-    /* Manutenção do Layout Lateral para os Cards de Tamanho */
-    .size-card {
-        min-height: auto;
-        align-items: stretch;
-    }
-    
-    .card-image-wrapper {
-        width: 100px;
-        height: auto;
-        border-bottom-left-radius: 10px; 
-        border-top-right-radius: 0;
-    }
-    
-    .card-image-wrapper img {
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        border-top-right-radius: 0;
-    }
+    /* Manutenção do Layout Lateral para os Cards de Tamanho */
+    .size-card {
+        min-height: auto;
+        align-items: stretch;
+    }
+    
+    .card-image-wrapper {
+        width: 100px;
+        height: auto;
+        border-bottom-left-radius: 10px; 
+        border-top-right-radius: 0;
+    }
+    
+    .card-image-wrapper img {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 0;
+    }
 
-    .card-content {
-        padding: 10px 15px;
-    }
+    .card-content {
+        padding: 10px 15px;
+    }
 
-    .size-name {
-        font-size: 1.2em;
-    }
-    
-    .size-price {
-        font-size: 1.2em;
-    }
-    
-    /* Ajuste do Resumo Final para Mobile (Total em cima, Botão embaixo) */
-    .resumo-box .resumo-actions {
-      flex-direction: column !important; 
-      gap: 10px !important;
-      align-items: stretch !important; /* Estica o botão Confirmar para 100% */
-    }
-    
-    .resumo-box button#confirmarPedidoResumo {
-      width: 100% !important;
-    }
+    .size-name {
+        font-size: 1.2em;
+    }
+    
+    .size-price {
+        font-size: 1.2em;
+    }
+    
+    /* Ajuste do Resumo Final para Mobile (Total em cima, Botão embaixo) */
+    .resumo-box .resumo-actions {
+      flex-direction: column !important; 
+      gap: 10px !important;
+      align-items: stretch !important; /* Estica o botão Confirmar para 100% */
+    }
+    
+    .resumo-box button#confirmarPedidoResumo {
+      width: 100% !important;
+    }
 }
 
 /* ========================================= */
-/* ESTILOS PARA TELA DE CONFIRMAÇÃO (NOVO)   */
+/* ESTILOS PARA TELA DE CONFIRMAÇÃO (NOVO)   */
 /* ========================================= */
 
 /* Centraliza o Total e os botões na tela de confirmação */
 .confirmation-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente o conteúdo */
-    gap: 15px; /* Espaçamento entre os elementos */
-    padding: 20px 0 0; /* Espaçamento superior */
-    width: 100%; /* Garante que o container ocupe a largura total */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente o conteúdo */
+    gap: 15px; /* Espaçamento entre os elementos */
+    padding: 20px 0 0; /* Espaçamento superior */
+    width: 100%; /* Garante que o container ocupe a largura total */
 }
 
 .confirmation-actions .resumo-total {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: var(--color-alert); /* Usando a cor de alerta para destaque do Total */
-    text-align: center; /* Garante que o texto Total a Pagar esteja centralizado */
-    width: 100%; 
-    padding: 5px 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--color-alert); /* Usando a cor de alerta para destaque do Total */
+    text-align: center; /* Garante que o texto Total a Pagar esteja centralizado */
+    width: 100%; 
+    padding: 5px 0;
 }
 
 /* Estilo para o botão do WhatsApp (Verde vibrante para destaque) */
 .btn-whatsapp {
-    background-color: #25D366; /* Verde do WhatsApp */
-    color: white;
-    font-weight: 600;
-    width: 100%; /* Ocupa a largura total do container */
-    max-width: 300px; /* Limita o tamanho máximo para não ficar muito largo */
-    padding: 12px 20px;
-    border: none;
-    transition: background-color 0.2s;
+    background-color: #25D366; /* Verde do WhatsApp */
+    color: white;
+    font-weight: 600;
+    width: 100%; /* Ocupa a largura total do container */
+    max-width: 300px; /* Limita o tamanho máximo para não ficar muito largo */
+    padding: 12px 20px;
+    border: none;
+    transition: background-color 0.2s;
 }
 
 .btn-whatsapp:hover {
-    background-color: #128C7E;
+    background-color: #128C7E;
 }
 
 /* MODIFICADO: Estilo para o botão de Voltar (Azul com Letra Branca) */
 .btn-voltar {
-    background-color: var(--blue); /* Usa a variável azul definida no :root */
-    color: white; /* Letra branca */
-    border: 1px solid var(--blue);
-    font-weight: 600; /* Mais destaque */
-    width: 100%;
-    max-width: 300px;
-    padding: 10px 20px;
-    transition: background-color 0.2s;
+    background-color: var(--blue); /* Usa a variável azul definida no :root */
+    color: white; /* Letra branca */
+    border: 1px solid var(--blue);
+    font-weight: 600; /* Mais destaque */
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    transition: background-color 0.2s;
 }
 
 .btn-voltar:hover {
-    background-color: #1e88e5; /* Um tom de azul mais escuro no hover */
+    background-color: #1e88e5; /* Um tom de azul mais escuro no hover */
 }
 
 
 @keyframes slideIn {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 /* Rodapé institucional */
 .site-footer {
-  background: #fff3e0;
-  color: #333;
-  text-align: center;
-  padding: 25px 10px;
-  font-size: 0.95rem;
-  border-top: 2px solid #FFD700;
+  background: #fff3e0;
+  color: #333;
+  text-align: center;
+  padding: 25px 10px;
+  font-size: 0.95rem;
+  border-top: 2px solid #FFD700;
 }
 
 .site-footer a {
-  color: var(--orange);
-  text-decoration: none;
-  font-weight: 600;
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .site-footer a:hover {
-  text-decoration: underline;
+  text-decoration: underline;
 }
 
 .footer-credit {
-  margin-top: 8px;
-  font-size: 0.85rem;
-  opacity: 0.8;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.8;
 }
 
 /* ======================================= */
 /* NOVO: ESTILOS PARA CAMPO DE OBSERVAÇÕES E CHIP */
 /* ======================================= */
 .text-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    resize: vertical; /* Permite redimensionar verticalmente */
-    min-height: 80px; /* Altura mínima */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 80px; /* Altura mínima */
 }
 
 /* Ajuste a margem para o grupo que contém o textarea */
-.grupo-opcoes:has(.text-input) { 
-    margin-bottom: 20px;
+.grupo-opcoes:has(.text-input) { 
+    margin-bottom: 20px;
 }
 
 /* Estilo para o chip de Observações no resumo */
 .chip-obs {
-    display: block; /* Ocupa a linha inteira */
-    background-color: var(--blue); /* Usa o azul para destaque */
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    font-weight: 500;
-    white-space: pre-wrap; /* Preserva formatação e quebras de linha */
+    display: block; /* Ocupa a linha inteira */
+    background-color: var(--blue); /* Usa o azul para destaque */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    font-weight: 500;
+    white-space: pre-wrap; /* Preserva formatação e quebras de linha */
 }
 
 
 
 /* ======================================= */
-/* MODO CINZA E OVERLAY QUANDO FECHADO     */
+/* MODO CINZA E OVERLAY QUANDO FECHADO     */
 /* ======================================= */
 body.store-closed {
-  filter: grayscale(100%) brightness(0.9);
-  pointer-events: none;
-  user-select: none;
-  overflow: hidden; /* impede rolagem quando fechado */
-  height: 100vh;
+  filter: grayscale(100%) brightness(0.9);
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden; /* impede rolagem quando fechado */
+  height: 100vh;
 }
 
 #closed-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  backdrop-filter: blur(5px);
-  overflow: hidden;
-  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+  padding: 0 20px;
 }
 
 body.store-closed #closed-overlay {
-  display: flex;
-  pointer-events: all;
+  display: flex;
+  pointer-events: all;
 }
 
 #closed-overlay h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
 #closed-overlay p {
-  font-size: 1.1rem;
-  margin: 0;
-  line-height: 1.4;
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.4;
 }
 
 #closed-overlay .btn {
-  background: #ff9800;
-  color: #fff;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 10px;
-  margin-top: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  background: #ff9800;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
 #closed-overlay .btn:hover {
-  background: #e68900;
+  background: #e68900;
 }
 
 /* 📱 Centralização garantida no mobile */
 @media (max-width: 600px) {
-  #closed-overlay {
-    padding: 0 10px;
-    text-align: center;
-  }
+  #closed-overlay {
+    padding: 0 10px;
+    text-align: center;
+  }
 
-  #closed-overlay h2 {
-    font-size: 1.6rem;
-  }
+  #closed-overlay h2 {
+    font-size: 1.6rem;
+  }
 
-  #closed-overlay p {
-    font-size: 1rem;
-  }
+  #closed-overlay p {
+    font-size: 1rem;
+  }
 
-  #closed-overlay .btn {
-    font-size: 0.95rem;
-    padding: 10px 20px;
-  }
+  #closed-overlay .btn {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
 }
 
 /* ======================================= */
@@ -1016,42 +1016,42 @@ body.store-closed #closed-overlay {
 
 /* Estilo Base para Status Fechado */
 .store-status.closed {
-    background-color: var(--color-alert); /* Vermelho */
-    color: white;
+    background-color: var(--color-alert); /* Vermelho */
+    color: white;
 }
 
 /* Estilo Base para Status Aberto (Sem Animação) */
 .store-status.open {
-    background-color: var(--color-success); /* Verde */
-    color: white;
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    background-color: var(--color-success); /* Verde */
+    color: white;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
 }
 
 /* -------------------------------------- */
-/* ANIMAÇÃO MODERNA DE PULSAÇÃO (BLINK)   */
+/* ANIMAÇÃO MODERNA DE PULSAÇÃO (BLINK)   */
 /* -------------------------------------- */
 
 /* 1. Aplica a animação ao status aberto */
 .store-status.open-animated {
-    /* Animação que alterna o tamanho e a sombra */
-    animation: statusPulse 2.5s infinite ease-in-out;
+    /* Animação que alterna o tamanho e a sombra */
+    animation: statusPulse 2.5s infinite ease-in-out;
 }
 
 /* 2. Keyframes da Animação de Pulsação */
 @keyframes statusPulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Sombra inicial transparente */
-    }
-    50% {
-        transform: scale(1.05); /* Levemente maior */
-        box-shadow: 0 0 15px 5px rgba(76, 175, 80, 0); /* Sombra mais forte, transparente */
-    }
-    70% {
-        box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.2); /* Sombra que pulsa */
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Volta à sombra inicial */
-    }
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Sombra inicial transparente */
+    }
+    50% {
+        transform: scale(1.05); /* Levemente maior */
+        box-shadow: 0 0 15px 5px rgba(76, 175, 80, 0); /* Sombra mais forte, transparente */
+    }
+    70% {
+        box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.2); /* Sombra que pulsa */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Volta à sombra inicial */
+    }
 }
