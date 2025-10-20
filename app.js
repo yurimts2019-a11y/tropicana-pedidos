@@ -34,14 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
             nome: '300 ML', 
             preco: 16, 
             id: 'tam-p', 
-            description: '🍓Pequena na medida, gigante no sabor!', 
+            description: '<strong>🍓Pequena na medida, gigante no sabor!</strong>', 
             imageURL: 'salada_300ml.jpg' // 🚨 Mude para o nome real da sua imagem
         },
         { 
             nome: '400 ML', 
             preco: 20, 
             id: 'tam-m', 
-            description: '🍍O equilíbrio perfeito entre frescor e sabor!', 
+            description: '<strong>🍍O equilíbrio perfeito entre frescor e sabor!</strong>', 
             imageURL: 'salada_400ml.jpg' // 🚨 Mude para o nome real da sua imagem
         },
         { 
