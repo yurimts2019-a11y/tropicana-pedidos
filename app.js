@@ -31,21 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1.1 DADOS DO CARDÁPIO (LISTAS ATUALIZADAS com descrição e imagem)
     const tamanhos = [
         { 
-            nome: '300ml (P)', 
+            nome: '300ML', 
             preco: 16, 
             id: 'tam-p', 
             description: '🍓Pequena na medida, gigante no sabor!', 
             imageURL: 'salada_300ml.jpg' // 🚨 Mude para o nome real da sua imagem
         },
         { 
-            nome: '400ml (M)', 
+            nome: '400ML', 
             preco: 20, 
             id: 'tam-m', 
             description: '🍍O equilíbrio perfeito entre frescor e sabor!', 
             imageURL: 'salada_400ml.jpg' // 🚨 Mude para o nome real da sua imagem
         },
         { 
-            nome: '500ml (G)', 
+            nome: '500ML', 
             preco: 24, 
             id: 'tam-g', 
             description: '🍇 Gigante em sabor, perfeita pra dividir (ou não)!', 
@@ -62,13 +62,13 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Acompanhamentos (Grátis)
-    const acomp = ['Creme de Maracujá', 'Creme de Ninho', 'Granola', 'Mel', 'Aveia'];
+    const acomp = ['🥣 Creme de Maracujá', '🥣 Creme de Ninho', '🥜 Granola', '🍯 Mel', '🌾 Aveia'];
     
     // NOVO: 1.2 DADOS DO HORÁRIO DE FUNCIONAMENTO (Baseado no rodapé do index.html)
     const storeHours = [
         { day: 1, open: 13, close: 22 }, // Segunda (13:00h - 22:00h)
         { day: 2, open: 13, close: 22 }, // Terça
-        { day: 3, open: 09, close: 22 }, // Quarta
+        { day: 3, open: 13, close: 22 }, // Quarta
         { day: 4, open: 13, close: 22 }, // Quinta
         { day: 5, open: 13, close: 17 }, // Sexta (13:00h - 17:00h)
         { day: 6, open: 0, close: 0 },   // Sábado (Fechado)
