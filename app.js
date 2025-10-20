@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nome: '500 ML', 
             preco: 24, 
             id: 'tam-g', 
-            description: '🍇 Gigante em sabor, perfeita pra dividir (ou não)!', 
+            description: '<strong>🍇 Gigante em sabor, perfeita pra dividir (ou não)!</strong>', 
             imageURL: 'salada_500ml.jpg' // 🚨 Mude para o nome real da sua imagem
         }
     ];
