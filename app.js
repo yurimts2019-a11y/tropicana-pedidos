@@ -31,24 +31,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1.1 DADOS DO CARDÁPIO (LISTAS ATUALIZADAS com descrição e imagem)
     const tamanhos = [
         { 
-            nome: '300ML', 
+            nome: '300 ML', 
             preco: 16, 
             id: 'tam-p', 
             description: '🍓Pequena na medida, gigante no sabor!', 
             imageURL: 'salada_300ml.jpg' // 🚨 Mude para o nome real da sua imagem
         },
         { 
-            nome: '400ML', 
+            nome: '400 ML', 
             preco: 20, 
             id: 'tam-m', 
             description: '🍍O equilíbrio perfeito entre frescor e sabor!', 
             imageURL: 'salada_400ml.jpg' // 🚨 Mude para o nome real da sua imagem
         },
         { 
-            nome: '500ML', 
+            nome: '500 ML', 
             preco: 24, 
             id: 'tam-g', 
-            description: '🍇 Gigante em sabor, perfeita pra dividir (ou não)!', 
+            description: '*🍇 Gigante em sabor, perfeita pra dividir (ou não)!*', 
             imageURL: 'salada_500ml.jpg' // 🚨 Mude para o nome real da sua imagem
         }
     ];
