@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Frutas (Grátis - Máx 5)
-    const fruits = [ '🍓 Morango', '🥭 Mamão', '🍇 Uva', '🍌 Banana', '🥭 Manga', '🍎 Maçã']; 
+    const fruits = ['🍍 Abacaxi', '🍓 Morango', '🥭 Mamão', '🍇 Uva', '🍌 Banana', '🥭 Manga', '🍎 Maçã']; 
 
     // Extras (R$2,00 cada - Adicionais)
     const extras = [
