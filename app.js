@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // NOVO: 1.2 DADOS DO HORÁRIO DE FUNCIONAMENTO (Baseado no rodapé do index.html)
     const storeHours = [
         { day: 1, open: 13, close: 22 }, // Segunda (13:00h - 22:00h)
-        { day: 2, open: 12, close: 22 }, // Terça
+        { day: 2, open: 11, close: 22 }, // Terça
         { day: 3, open: 13, close: 22 }, // Quarta
         { day: 4, open: 13, close: 22 }, // Quinta
         { day: 5, open: 13, close: 17 }, // Sexta (13:00h - 17:00h)
