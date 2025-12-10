@@ -30,6 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 1.1 DADOS DO CARDÁPIO (LISTAS ATUALIZADAS com descrição e imagem)
     const tamanhos = [
+         { 
+            nome: '300 ML', 
+            preco: 16, 
+            id: 'tam-p', 
+            description: '<strong>Pequena na medida, gigante no sabor! 🍎</strong>', 
+            imageURL: 'salada_300ml.jpg' 
+        },
+        
         { 
             nome: '400 ML', 
             preco: 20, 
